@@ -10,6 +10,23 @@ import { useStore } from '../lib/store';
 export default function Customize() {
   const { cards, addCard } = useStore();
   const [showHelp, setShowHelp] = useState(false);
+  const [activeCardIds, setActiveCardIds] = useState(new Set());
+
+  const handleAddCard = () => {
+    addCard();
+    // The new card will be active - we'll add its ID after it's created
+    // Since addCard uses Date.now() for ID, we approximate by activating the latest
+    setTimeout(() => {
+      const latestCard = cards[cards.length - 1];
+      if (latestCard) {
+        setActiveCardIds((prev) => new Set([...prev, latestCard.id]));
+      }
+    }, 0);
+  };
+
+  const activateCard = (cardId) => {
+    setActiveCardIds((prev) => new Set([...prev, cardId]));
+  };
 
   return (
     <Layout title="Customize Your Bouquet">
@@ -20,12 +37,20 @@ export default function Customize() {
             {/* LEFT SIDE - Cards and uploads */}
             <div className="flex-1 space-y-6">
               {cards.map((card, index) => (
-                <div key={card.id} className="space-y-4">
+                <div
+                  key={card.id}
+                  className="space-y-4"
+                  onClick={() => activateCard(card.id)}
+                >
                   {/* Letter Card */}
-                  <LetterCard card={card} showRemove={cards.length > 1} />
+                  <LetterCard
+                    card={card}
+                    showRemove={cards.length > 1}
+                    isActive={activeCardIds.has(card.id)}
+                  />
 
                   {/* Image Upload */}
-                  <div className="relative">
+                  <div className="relative max-w-sm">
                     <ImageUpload cardId={card.id} />
                     <div className="absolute -bottom-2 -right-2 font-cursive text-xl text-cream-white drop-shadow-lg">
                       $5
@@ -36,7 +61,7 @@ export default function Customize() {
 
               {/* Add Card Button */}
               <button
-                onClick={addCard}
+                onClick={handleAddCard}
                 className="btn-pill text-lg flex items-center gap-2"
               >
                 <span className="text-xl">+</span> add card

@@ -1,6 +1,6 @@
 import { useStore } from '../lib/store';
 
-export default function LetterCard({ card, showRemove = false }) {
+export default function LetterCard({ card, showRemove = false, isActive = true }) {
   const { updateCard, removeCard } = useStore();
 
   const handleChange = (field, value) => {
@@ -8,7 +8,10 @@ export default function LetterCard({ card, showRemove = false }) {
   };
 
   return (
-    <div className="card p-6 relative max-w-sm" style={{ aspectRatio: '5.5 / 4.5' }}>
+    <div
+      className={`card p-6 relative max-w-sm transition-opacity duration-200 ${isActive ? 'opacity-100' : 'opacity-50 hover:opacity-75'}`}
+      style={{ aspectRatio: '5.5 / 4.5' }}
+    >
       {showRemove && (
         <button
           onClick={() => removeCard(card.id)}
@@ -26,8 +29,7 @@ export default function LetterCard({ card, showRemove = false }) {
           type="text"
           value={card.recipientName}
           onChange={(e) => handleChange('recipientName', e.target.value)}
-          placeholder="xxx"
-          className="font-cursive text-2xl text-card-text bg-transparent border-b border-gray-300 focus:border-deep-red outline-none w-32 placeholder-gray-400"
+          className="font-cursive text-2xl text-card-text bg-transparent border-b border-gray-300 focus:border-deep-red outline-none w-32"
         />
         <span className="font-cursive text-2xl text-card-text">,</span>
       </div>
@@ -36,8 +38,7 @@ export default function LetterCard({ card, showRemove = false }) {
       <textarea
         value={card.message}
         onChange={(e) => handleChange('message', e.target.value)}
-        placeholder="Happy Valentines day! I love you blah blah blah blah blah blah blah blah blah"
-        className="font-cursive text-lg text-card-text bg-transparent w-full h-20 resize-none outline-none placeholder-gray-400 leading-relaxed"
+        className="font-cursive text-lg text-card-text bg-transparent w-full h-20 resize-none outline-none leading-relaxed"
         style={{ fontStyle: 'italic' }}
       />
 
@@ -48,8 +49,7 @@ export default function LetterCard({ card, showRemove = false }) {
           type="text"
           value={card.senderName}
           onChange={(e) => handleChange('senderName', e.target.value)}
-          placeholder="XXX"
-          className="font-cursive text-xl text-card-text italic bg-transparent border-b border-gray-300 focus:border-deep-red outline-none w-24 placeholder-gray-400 text-right"
+          className="font-cursive text-xl text-card-text italic bg-transparent border-b border-gray-300 focus:border-deep-red outline-none w-24 text-right"
         />
       </div>
     </div>
