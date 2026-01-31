@@ -111,9 +111,18 @@ export default function Customize() {
             onClick={() => setShowHelp(false)}
           >
             <div
-              className="card p-8 max-w-2xl w-full"
+              className="card p-8 max-w-2xl w-full relative"
               onClick={(e) => e.stopPropagation()}
             >
+              {/* Close button */}
+              <button
+                onClick={() => setShowHelp(false)}
+                className="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-card-text text-xl flex items-center justify-center transition-colors"
+                aria-label="Close"
+              >
+                &times;
+              </button>
+
               <h3 className="font-cursive text-4xl text-card-text mb-6">
                 How It Works
               </h3>
@@ -143,12 +152,10 @@ export default function Customize() {
                 />
               </div>
 
-              <button
-                onClick={() => setShowHelp(false)}
-                className="btn-pill mt-6 w-full text-xl"
-              >
-                Got it!
-              </button>
+              {/* Caption */}
+              <p className="font-cursive text-lg text-gray-600 mt-4 text-center">
+                The bouquet is carefully boxed, and the stems are wrapped in moist cotton so the flowers stay fresh during shipping.
+              </p>
             </div>
           </div>
         )}
