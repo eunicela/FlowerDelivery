@@ -31,7 +31,7 @@ export default function Confirmation() {
   if (loading && session_id) {
     return (
       <Layout title="Order Confirmation">
-        <div className="min-h-screen flex items-center justify-center">
+        <div className="min-h-screen px-8 md:px-16 lg:px-24 flex items-center justify-center">
           <div className="card p-8 text-center">
             <p className="font-cursive text-2xl text-card-text">
               Loading your order details...
@@ -45,7 +45,7 @@ export default function Confirmation() {
   if (!session_id) {
     return (
       <Layout title="Order Confirmation">
-        <div className="min-h-screen flex items-center justify-center">
+        <div className="min-h-screen px-8 md:px-16 lg:px-24 flex items-center justify-center">
           <div className="card p-8 text-center">
             <p className="font-cursive text-2xl text-card-text mb-4">
               No order found
@@ -61,8 +61,8 @@ export default function Confirmation() {
 
   return (
     <Layout title="Order Confirmed - Valentine's Flower Delivery">
-      <div className="min-h-screen py-12 px-4">
-        <div className="max-w-2xl mx-auto">
+      <div className="min-h-screen py-12 px-8 md:px-16 lg:px-24 flex flex-col justify-center">
+        <div className="max-w-2xl mx-auto w-full">
           {/* Success Card */}
           <div className="card p-8 text-center mb-8">
             {/* Checkmark */}

@@ -116,8 +116,8 @@ export default function Checkout() {
 
   return (
     <Layout title="Checkout - Valentine's Flower Delivery">
-      <div className="min-h-screen py-8 px-4">
-        <div className="max-w-4xl mx-auto">
+      <div className="min-h-screen py-8 px-8 md:px-16 lg:px-24 flex flex-col justify-center">
+        <div className="max-w-4xl mx-auto w-full">
           <Link
             href="/customize"
             className="font-cursive text-xl text-cream-white hover:text-soft-pink mb-6 inline-block"
