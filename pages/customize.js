@@ -8,25 +8,25 @@ import ColorSelector from '../components/ColorSelector';
 import { useStore } from '../lib/store';
 
 export default function Customize() {
-  const { cards, addCard } = useStore();
+  const { cards } = useStore();
   const [showHelp, setShowHelp] = useState(false);
-  const [activeCardIds, setActiveCardIds] = useState(new Set());
+  const [unlockedCardIds, setUnlockedCardIds] = useState(new Set());
 
-  const handleAddCard = () => {
-    addCard();
-    // The new card will be active - we'll add its ID after it's created
-    // Since addCard uses Date.now() for ID, we approximate by activating the latest
-    setTimeout(() => {
-      const latestCard = cards[cards.length - 1];
-      if (latestCard) {
-        setActiveCardIds((prev) => new Set([...prev, latestCard.id]));
+  const toggleCardLock = (cardId) => {
+    setUnlockedCardIds((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(cardId)) {
+        newSet.delete(cardId);
+      } else {
+        newSet.add(cardId);
       }
-    }, 0);
+      return newSet;
+    });
   };
 
-  const activateCard = (cardId) => {
-    setActiveCardIds((prev) => new Set([...prev, cardId]));
-  };
+  // For the first card, use a simple toggle
+  const firstCard = cards[0];
+  const isFirstCardLocked = !unlockedCardIds.has(firstCard?.id);
 
   return (
     <Layout title="Customize Your Bouquet">
@@ -36,37 +36,37 @@ export default function Customize() {
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
             {/* LEFT SIDE - Cards and uploads */}
             <div className="flex-1 space-y-6">
-              {cards.map((card, index) => (
-                <div
-                  key={card.id}
-                  className="space-y-4"
-                  onClick={() => activateCard(card.id)}
-                >
-                  {/* Letter Card */}
+              {/* Only show the first card for now */}
+              {firstCard && (
+                <div className="space-y-4 max-w-sm">
+                  {/* Letter Card (Front) */}
                   <LetterCard
-                    card={card}
-                    showRemove={cards.length > 1}
-                    isActive={activeCardIds.has(card.id)}
+                    card={firstCard}
+                    showRemove={false}
+                    isLocked={isFirstCardLocked}
                   />
 
-                  {/* Image Upload */}
-                  <div className="relative max-w-sm">
-                    <ImageUpload cardId={card.id} />
-                    <div className="absolute -bottom-2 -right-2 font-cursive text-xl text-cream-white drop-shadow-lg">
-                      $5
-                    </div>
+                  {/* Image Upload (Back) */}
+                  <ImageUpload
+                    cardId={firstCard.id}
+                    isLocked={isFirstCardLocked}
+                  />
+
+                  {/* Price tag */}
+                  <div className="font-cursive text-xl text-cream-white drop-shadow-lg text-right">
+                    $5
                   </div>
                 </div>
-              ))}
+              )}
 
-              {/* Add Card Button */}
+              {/* Add Letter Button */}
               <button
-                onClick={handleAddCard}
+                onClick={() => toggleCardLock(firstCard?.id)}
                 className="btn-pill text-lg flex items-center gap-2"
               >
-                <span className="text-xl">+</span> add card
+                <span className="text-xl">{isFirstCardLocked ? '+' : '-'}</span>
+                {isFirstCardLocked ? 'add letter' : 'remove letter'}
               </button>
-              <span className="font-cursive text-cream-white ml-2">$5 each</span>
             </div>
 
             {/* RIGHT SIDE - Bouquet display */}
@@ -118,16 +118,16 @@ export default function Customize() {
               </h3>
               <ul className="font-cursive text-xl text-card-text space-y-3">
                 <li>
-                  <span className="text-deep-red">1.</span> Write your personalized letter
+                  <span className="text-deep-red">1.</span> Click &quot;add letter&quot; to unlock the card
                 </li>
                 <li>
-                  <span className="text-deep-red">2.</span> Upload a photo (optional)
+                  <span className="text-deep-red">2.</span> Write your personalized letter
                 </li>
                 <li>
-                  <span className="text-deep-red">3.</span> Choose your bouquet color
+                  <span className="text-deep-red">3.</span> Upload a photo (optional)
                 </li>
                 <li>
-                  <span className="text-deep-red">4.</span> Add more cards if desired
+                  <span className="text-deep-red">4.</span> Choose your bouquet color
                 </li>
                 <li>
                   <span className="text-deep-red">5.</span> Checkout and send your love!
@@ -139,7 +139,7 @@ export default function Customize() {
                   <br />
                   Bouquet: $80
                   <br />
-                  Each card with photo: $5
+                  Letter with photo: $5
                 </p>
               </div>
               <button

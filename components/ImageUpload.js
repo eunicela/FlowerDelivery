@@ -2,13 +2,14 @@ import { useRef, useState } from 'react';
 import { useStore } from '../lib/store';
 import Image from 'next/image';
 
-export default function ImageUpload({ cardId }) {
+export default function ImageUpload({ cardId, isLocked = true }) {
   const { cards, updateCard } = useStore();
   const card = cards.find((c) => c.id === cardId);
   const fileInputRef = useRef(null);
   const [isUploading, setIsUploading] = useState(false);
 
   const handleClick = () => {
+    if (isLocked) return;
     fileInputRef.current?.click();
   };
 
@@ -51,7 +52,10 @@ export default function ImageUpload({ cardId }) {
   };
 
   return (
-    <div className="card overflow-hidden">
+    <div
+      className="card overflow-hidden relative w-full"
+      style={{ aspectRatio: '5.5 / 4.5' }}
+    >
       <input
         ref={fileInputRef}
         type="file"
@@ -60,27 +64,48 @@ export default function ImageUpload({ cardId }) {
         className="hidden"
       />
 
+      {/* Lock Overlay */}
+      {isLocked && (
+        <div className="absolute inset-0 bg-black/20 rounded-2xl flex items-center justify-center z-10">
+          <svg
+            className="w-12 h-12 text-gray-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+            />
+          </svg>
+        </div>
+      )}
+
       {card?.imageUrl ? (
-        <div className="relative aspect-video">
+        <div className="relative w-full h-full">
           <Image
             src={card.imageUrl}
             alt="Uploaded photo"
             fill
             className="object-cover"
           />
-          <button
-            onClick={removeImage}
-            className="absolute top-2 right-2 w-6 h-6 rounded-full bg-deep-red text-white text-sm hover:bg-red-800 transition-colors"
-            aria-label="Remove image"
-          >
-            &times;
-          </button>
+          {!isLocked && (
+            <button
+              onClick={removeImage}
+              className="absolute top-2 right-2 w-6 h-6 rounded-full bg-deep-red text-white text-sm hover:bg-red-800 transition-colors z-20"
+              aria-label="Remove image"
+            >
+              &times;
+            </button>
+          )}
         </div>
       ) : (
         <button
           onClick={handleClick}
-          disabled={isUploading}
-          className="w-full aspect-video flex flex-col items-center justify-center bg-gray-100 hover:bg-gray-200 transition-colors cursor-pointer"
+          disabled={isUploading || isLocked}
+          className="w-full h-full flex flex-col items-center justify-center bg-gray-100 hover:bg-gray-200 transition-colors cursor-pointer disabled:cursor-not-allowed"
         >
           {isUploading ? (
             <span className="font-cursive text-xl text-gray-500">Uploading...</span>
