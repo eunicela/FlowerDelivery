@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import Layout from '../components/Layout';
 import LetterCard from '../components/LetterCard';
 import ImageUpload from '../components/ImageUpload';
@@ -84,7 +85,7 @@ export default function Customize() {
               {/* Help button */}
               <button
                 onClick={() => setShowHelp(true)}
-                className="absolute left-1/4 bottom-24 w-10 h-10 rounded-full bg-cream-white text-card-text font-cursive text-xl flex items-center justify-center shadow-md hover:shadow-lg transition-shadow"
+                className="absolute left-4 bottom-24 w-10 h-10 rounded-full bg-cream-white text-card-text font-cursive text-xl flex items-center justify-center shadow-md hover:shadow-lg transition-shadow"
                 aria-label="Help"
               >
                 ?
@@ -110,38 +111,38 @@ export default function Customize() {
             onClick={() => setShowHelp(false)}
           >
             <div
-              className="card p-8 max-w-md"
+              className="card p-8 max-w-2xl w-full"
               onClick={(e) => e.stopPropagation()}
             >
-              <h3 className="font-cursive text-3xl text-card-text mb-4">
+              <h3 className="font-cursive text-4xl text-card-text mb-6">
                 How It Works
               </h3>
-              <ul className="font-cursive text-xl text-card-text space-y-3">
+              <ul className="font-cursive text-xl text-card-text space-y-4">
                 <li>
-                  <span className="text-deep-red">1.</span> Click &quot;add letter&quot; to unlock the card
+                  <span className="text-deep-red">1.</span> Click &quot;add card&quot; to unlock the card
                 </li>
                 <li>
-                  <span className="text-deep-red">2.</span> Write your personalized letter
+                  <span className="text-deep-red">2.</span> Write your personalized letter and upload a photo
                 </li>
                 <li>
-                  <span className="text-deep-red">3.</span> Upload a photo (optional)
+                  <span className="text-deep-red">3.</span> Choose your bouquet color
                 </li>
                 <li>
-                  <span className="text-deep-red">4.</span> Choose your bouquet color
-                </li>
-                <li>
-                  <span className="text-deep-red">5.</span> Checkout and send your love!
+                  <span className="text-deep-red">4.</span> Have your bouquet delivered by Valentine&apos;s day!
                 </li>
               </ul>
-              <div className="mt-6 pt-4 border-t">
-                <p className="font-cursive text-lg text-gray-600">
-                  <strong>Pricing:</strong>
-                  <br />
-                  Bouquet: $80
-                  <br />
-                  Letter with photo: $5
-                </p>
+
+              {/* Product Image */}
+              <div className="mt-6 rounded-lg overflow-hidden">
+                <Image
+                  src="/product-preview.png"
+                  alt="Valentine's bouquet with card"
+                  width={800}
+                  height={400}
+                  className="w-full h-auto object-cover"
+                />
               </div>
+
               <button
                 onClick={() => setShowHelp(false)}
                 className="btn-pill mt-6 w-full text-xl"
