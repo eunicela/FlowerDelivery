@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --deep-red: #722F37;
+  --soft-pink: #F4C2C2;
+  --cream-white: #FFFEF9;
+  --card-bg: #FFFFFF;
+  --card-text: #2C2C2C;
+}
+
+body {
+  font-family: 'Caveat', 'Dancing Script', cursive;
+}
+
+/* Custom scrollbar for a cozy feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(114, 47, 55, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--deep-red);
+  border-radius: 4px;
+}
+
+/* Card styles */
+.card {
+  @apply bg-white rounded-2xl shadow-md;
+}
+
+/* Button pill style */
+.btn-pill {
+  @apply bg-white rounded-full px-6 py-2 font-cursive text-card-text shadow-md
+         hover:shadow-lg transition-shadow cursor-pointer;
+}
+
+/* Color selector dot */
+.color-dot {
+  @apply w-8 h-8 rounded-full border-2 border-white cursor-pointer
+         transition-all duration-200 hover:scale-110;
+}
+
+.color-dot.selected {
+  @apply ring-2 ring-white ring-offset-2 ring-offset-transparent;
+}
+
+/* Letter card styling */
+.letter-text {
+  @apply font-cursive text-card-text;
+}
+
+/* Price overlay */
+.price-tag {
+  @apply font-cursive text-white text-2xl drop-shadow-lg;
+}
