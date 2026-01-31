@@ -30,7 +30,7 @@ export default function Customize() {
 
   return (
     <Layout title="Customize Your Bouquet">
-      <div className="min-h-screen py-8 px-4 md:px-8">
+      <div className="min-h-screen py-8 px-8 md:px-16 lg:px-24">
         <div className="max-w-7xl mx-auto">
           {/* Main layout - two columns on desktop */}
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
