@@ -9,8 +9,8 @@ export default function LetterCard({ card, showRemove = false, isLocked = true }
 
   return (
     <div
-      className="card p-6 relative w-full"
-      style={{ aspectRatio: '5.5 / 4.5' }}
+      className="card p-6 relative w-full flex flex-col items-center justify-center text-center"
+      style={{ aspectRatio: '6 / 4.5' }}
     >
       {/* Lock Overlay */}
       {isLocked && (

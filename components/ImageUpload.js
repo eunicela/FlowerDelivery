@@ -54,7 +54,7 @@ export default function ImageUpload({ cardId, isLocked = true }) {
   return (
     <div
       className="card overflow-hidden relative w-full"
-      style={{ aspectRatio: '5.5 / 4.5' }}
+      style={{ aspectRatio: '6 / 4.5' }}
     >
       <input
         ref={fileInputRef}

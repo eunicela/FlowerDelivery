@@ -51,22 +51,22 @@ export default function Customize() {
                     cardId={firstCard.id}
                     isLocked={isFirstCardLocked}
                   />
-
-                  {/* Price tag */}
-                  <div className="font-cursive text-xl text-cream-white drop-shadow-lg text-right">
-                    $5
-                  </div>
                 </div>
               )}
 
-              {/* Add Letter Button */}
-              <button
-                onClick={() => toggleCardLock(firstCard?.id)}
-                className="btn-pill text-lg flex items-center gap-2"
-              >
-                <span className="text-xl">{isFirstCardLocked ? '+' : '-'}</span>
-                {isFirstCardLocked ? 'add letter' : 'remove letter'}
-              </button>
+              {/* Add Letter Button with Price */}
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => toggleCardLock(firstCard?.id)}
+                  className="btn-pill text-lg flex items-center gap-2"
+                >
+                  <span className="text-xl">{isFirstCardLocked ? '+' : '-'}</span>
+                  {isFirstCardLocked ? 'add card' : 'remove card'}
+                </button>
+                <span className="font-cursive text-xl text-cream-white drop-shadow-lg">
+                  +$5
+                </span>
+              </div>
             </div>
 
             {/* RIGHT SIDE - Bouquet display */}
