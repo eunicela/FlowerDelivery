@@ -35,10 +35,10 @@ export default function Customize() {
           {/* Main layout - two columns on desktop */}
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
             {/* LEFT SIDE - Cards and uploads */}
-            <div className="flex-1 space-y-6">
+            <div className="flex-1 flex flex-col items-center justify-center space-y-6">
               {/* Only show the first card for now */}
               {firstCard && (
-                <div className="space-y-4 max-w-sm">
+                <div className="space-y-4 w-full max-w-md">
                   {/* Letter Card (Front) */}
                   <LetterCard
                     card={firstCard}
