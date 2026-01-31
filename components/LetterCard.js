@@ -8,7 +8,7 @@ export default function LetterCard({ card, showRemove = false }) {
   };
 
   return (
-    <div className="card p-6 relative">
+    <div className="card p-6 relative max-w-sm" style={{ aspectRatio: '5.5 / 4.5' }}>
       {showRemove && (
         <button
           onClick={() => removeCard(card.id)}
@@ -37,12 +37,12 @@ export default function LetterCard({ card, showRemove = false }) {
         value={card.message}
         onChange={(e) => handleChange('message', e.target.value)}
         placeholder="Happy Valentines day! I love you blah blah blah blah blah blah blah blah blah"
-        className="font-cursive text-xl text-card-text bg-transparent w-full h-32 resize-none outline-none placeholder-gray-400 leading-relaxed"
+        className="font-cursive text-lg text-card-text bg-transparent w-full h-20 resize-none outline-none placeholder-gray-400 leading-relaxed"
         style={{ fontStyle: 'italic' }}
       />
 
       {/* from, ___ */}
-      <div className="mt-8 text-right">
+      <div className="mt-4 text-right">
         <span className="font-cursive text-xl text-card-text italic">from, </span>
         <input
           type="text"
