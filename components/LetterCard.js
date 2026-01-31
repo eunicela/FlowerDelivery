@@ -12,25 +12,6 @@ export default function LetterCard({ card, showRemove = false, isLocked = true }
       className="card p-6 relative w-full flex flex-col justify-between"
       style={{ aspectRatio: '6 / 4.5' }}
     >
-      {/* Lock Overlay */}
-      {isLocked && (
-        <div className="absolute inset-0 bg-black/20 rounded-2xl flex items-center justify-center z-10">
-          <svg
-            className="w-12 h-12 text-gray-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-            />
-          </svg>
-        </div>
-      )}
-
       {showRemove && !isLocked && (
         <button
           onClick={() => removeCard(card.id)}
@@ -49,7 +30,7 @@ export default function LetterCard({ card, showRemove = false, isLocked = true }
           value={card.recipientName}
           onChange={(e) => handleChange('recipientName', e.target.value)}
           disabled={isLocked}
-          className="font-cursive text-2xl text-card-text bg-transparent border-b border-gray-300 focus:border-deep-red outline-none w-32 disabled:cursor-not-allowed"
+          className="font-cursive text-2xl text-card-text bg-transparent border-b border-gray-300 focus:border-deep-red outline-none w-32 disabled:cursor-default"
         />
         <span className="font-cursive text-2xl text-card-text">,</span>
 
@@ -58,7 +39,7 @@ export default function LetterCard({ card, showRemove = false, isLocked = true }
           value={card.message}
           onChange={(e) => handleChange('message', e.target.value)}
           disabled={isLocked}
-          className="font-cursive text-lg text-card-text bg-transparent w-full h-16 resize-none outline-none leading-relaxed disabled:cursor-not-allowed mt-2"
+          className="font-cursive text-lg text-card-text bg-transparent w-full h-16 resize-none outline-none leading-relaxed disabled:cursor-default mt-2"
           style={{ fontStyle: 'italic' }}
         />
       </div>
@@ -71,7 +52,7 @@ export default function LetterCard({ card, showRemove = false, isLocked = true }
           value={card.senderName}
           onChange={(e) => handleChange('senderName', e.target.value)}
           disabled={isLocked}
-          className="font-cursive text-xl text-card-text italic bg-transparent border-b border-gray-300 focus:border-deep-red outline-none w-24 text-right disabled:cursor-not-allowed"
+          className="font-cursive text-xl text-card-text italic bg-transparent border-b border-gray-300 focus:border-deep-red outline-none w-24 text-right disabled:cursor-default"
         />
       </div>
     </div>
