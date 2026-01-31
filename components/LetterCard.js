@@ -9,7 +9,7 @@ export default function LetterCard({ card, showRemove = false, isLocked = true }
 
   return (
     <div
-      className="card p-6 relative w-full flex flex-col items-center justify-center text-center"
+      className="card p-6 relative w-full flex flex-col justify-between"
       style={{ aspectRatio: '6 / 4.5' }}
     >
       {/* Lock Overlay */}
@@ -41,8 +41,8 @@ export default function LetterCard({ card, showRemove = false, isLocked = true }
         </button>
       )}
 
-      {/* Dear ___ */}
-      <div className="mb-4">
+      {/* Top section - Dear ___ */}
+      <div>
         <span className="font-cursive text-2xl text-card-text">Dear </span>
         <input
           type="text"
@@ -52,19 +52,19 @@ export default function LetterCard({ card, showRemove = false, isLocked = true }
           className="font-cursive text-2xl text-card-text bg-transparent border-b border-gray-300 focus:border-deep-red outline-none w-32 disabled:cursor-not-allowed"
         />
         <span className="font-cursive text-2xl text-card-text">,</span>
+
+        {/* Message body */}
+        <textarea
+          value={card.message}
+          onChange={(e) => handleChange('message', e.target.value)}
+          disabled={isLocked}
+          className="font-cursive text-lg text-card-text bg-transparent w-full h-16 resize-none outline-none leading-relaxed disabled:cursor-not-allowed mt-2"
+          style={{ fontStyle: 'italic' }}
+        />
       </div>
 
-      {/* Message body */}
-      <textarea
-        value={card.message}
-        onChange={(e) => handleChange('message', e.target.value)}
-        disabled={isLocked}
-        className="font-cursive text-lg text-card-text bg-transparent w-full h-20 resize-none outline-none leading-relaxed disabled:cursor-not-allowed"
-        style={{ fontStyle: 'italic' }}
-      />
-
-      {/* from, ___ */}
-      <div className="mt-4 text-right">
+      {/* Bottom section - from, ___ */}
+      <div className="text-right">
         <span className="font-cursive text-xl text-card-text italic">from, </span>
         <input
           type="text"
