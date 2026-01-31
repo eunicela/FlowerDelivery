@@ -5,9 +5,9 @@ export default function BouquetDisplay() {
   const { flowerColor } = useStore();
 
   const bouquetImages = {
-    red: '/bouquet-red.svg',
-    pink: '/bouquet-pink.svg',
-    white: '/bouquet-white.svg',
+    red: '/bouquet-red.png',
+    pink: '/bouquet-pink.png',
+    white: '/bouquet-white.png',
   };
 
   return (

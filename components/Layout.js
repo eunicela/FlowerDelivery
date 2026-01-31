@@ -12,7 +12,7 @@ export default function Layout({ children, title = 'Valentine\'s Flower Delivery
       <div
         className="min-h-screen w-full"
         style={{
-          backgroundImage: `url('/wood-bg.svg')`,
+          backgroundImage: `url('/wood-bg.png')`,
           backgroundRepeat: 'repeat',
           backgroundSize: '100px auto',
         }}

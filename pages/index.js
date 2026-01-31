@@ -26,7 +26,7 @@ export default function Home() {
           {/* Bouquet preview */}
           <div className="my-8">
             <Image
-              src="/bouquet-red.svg"
+              src="/bouquet-red.png"
               alt="Beautiful red rose bouquet"
               width={300}
               height={375}
