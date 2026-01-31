@@ -15,8 +15,8 @@ export default function BouquetDisplay() {
       <Image
         src={bouquetImages[flowerColor]}
         alt={`${flowerColor} rose bouquet`}
-        width={500}
-        height={625}
+        width={600}
+        height={750}
         className="drop-shadow-2xl"
         priority
       />
