@@ -30,12 +30,12 @@ export default function Customize() {
 
   return (
     <Layout title="Customize Your Bouquet">
-      <div className="min-h-screen py-8 px-8 md:px-16 lg:px-24">
-        <div className="max-w-7xl mx-auto">
+      <div className="h-screen px-8 md:px-16 lg:px-24 flex items-center justify-center">
+        <div className="max-w-7xl w-full">
           {/* Main layout - two columns on desktop */}
-          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
             {/* LEFT SIDE - Cards and uploads */}
-            <div className="flex-1 flex flex-col items-center justify-center space-y-6">
+            <div className="flex-1 flex flex-col items-center space-y-6">
               {/* Only show the first card for now */}
               {firstCard && (
                 <div className="space-y-4 w-full max-w-md">
@@ -70,7 +70,7 @@ export default function Customize() {
             </div>
 
             {/* RIGHT SIDE - Bouquet display */}
-            <div className="flex-1 flex flex-col items-center justify-center relative">
+            <div className="flex-1 flex flex-col items-center relative">
               {/* Bouquet with price */}
               <div className="relative">
                 <BouquetDisplay />
