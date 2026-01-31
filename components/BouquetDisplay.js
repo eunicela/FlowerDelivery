@@ -11,12 +11,12 @@ export default function BouquetDisplay() {
   };
 
   return (
-    <div className="relative">
+    <div className="relative" style={{ transform: 'rotate(8deg)' }}>
       <Image
         src={bouquetImages[flowerColor]}
         alt={`${flowerColor} rose bouquet`}
-        width={400}
-        height={500}
+        width={500}
+        height={625}
         className="drop-shadow-2xl"
         priority
       />

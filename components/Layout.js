@@ -13,8 +13,9 @@ export default function Layout({ children, title = 'Valentine\'s Flower Delivery
         className="min-h-screen w-full"
         style={{
           backgroundImage: `url('/wood-bg.png')`,
-          backgroundRepeat: 'repeat',
-          backgroundSize: '100px auto',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }}
       >
         {children}
