@@ -15,6 +15,7 @@ module.exports = {
       },
       fontFamily: {
         cursive: ['Caveat', 'Dancing Script', 'cursive'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
       },
     },
   },
