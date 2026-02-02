@@ -42,7 +42,7 @@ export default function Customize() {
                 </div>
               )}
 
-              {/* Add Letter Button with Price */}
+              {/* Add Letter Button with Price and Checkout */}
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => toggleCardIncluded(firstCard?.id)}
@@ -51,9 +51,15 @@ export default function Customize() {
                   <span className="text-xl">{isFirstCardLocked ? '+' : '-'}</span>
                   {isFirstCardLocked ? 'add card' : 'remove card'}
                 </button>
-                <span className="font-cursive text-xl text-cream-white drop-shadow-lg">
+                <span className="font-cursive text-xl text-cream-white drop-shadow-lg font-bold">
                   +$5
                 </span>
+                <Link
+                  href="/checkout"
+                  className="btn-pill text-lg px-6 py-2 hover:scale-105 transform transition-all inline-block"
+                >
+                  Checkout
+                </Link>
               </div>
             </div>
 
@@ -77,16 +83,6 @@ export default function Customize() {
               >
                 ?
               </button>
-
-              {/* Checkout button */}
-              <div className="mt-8 lg:absolute lg:bottom-8 lg:right-8">
-                <Link
-                  href="/checkout"
-                  className="btn-pill text-2xl px-8 py-3 hover:scale-105 transform transition-all inline-block"
-                >
-                  Checkout
-                </Link>
-              </div>
             </div>
           </div>
         </div>

@@ -113,7 +113,7 @@ export default async function handler(req, res) {
       }
     }
 
-    res.status(200).json({ sessionId: session.id });
+    res.status(200).json({ sessionId: session.id, url: session.url });
   } catch (error) {
     console.error('Checkout error:', error);
     res.status(500).json({ error: 'Failed to create checkout session' });
