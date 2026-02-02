@@ -1,68 +1,100 @@
 import Link from 'next/link';
-import Layout from '../components/Layout';
 import Image from 'next/image';
+import Head from 'next/head';
 
 export default function Home() {
   return (
-    <Layout title="Valentine's Flower Delivery - Send Love">
-      <div className="min-h-screen flex flex-col items-center justify-center px-4">
-        {/* Hero Section */}
-        <div className="text-center max-w-2xl">
-          {/* Decorative hearts */}
-          <div className="flex justify-center gap-4 mb-6">
-            <span className="text-4xl text-deep-red animate-pulse">&#x2665;</span>
-            <span className="text-5xl text-soft-pink animate-pulse delay-100">&#x2665;</span>
-            <span className="text-4xl text-deep-red animate-pulse delay-200">&#x2665;</span>
+    <>
+      <Head>
+        <title>Valentine&apos;s Bouquet - Piazza x EunifiedWorld</title>
+        <meta name="description" content="Send beautiful Valentine's Day flowers with a personalized letter" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <div className="min-h-screen bg-beige relative overflow-hidden">
+        {/* Navigation */}
+        <nav className="absolute top-0 left-0 p-8 z-20">
+          <ul className="flex gap-8 font-serif text-lg text-card-text">
+            <li>
+              <Link href="/" className="hover:opacity-70 transition-opacity">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link href="/about" className="hover:opacity-70 transition-opacity">
+                About
+              </Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* Main Content */}
+        <div className="min-h-screen flex">
+          {/* Left Side - Text Content */}
+          <div className="flex-1 flex flex-col justify-center px-8 md:px-16 lg:px-20 z-10">
+            <div className="max-w-lg">
+              {/* Subtitle */}
+              <p className="font-serif text-xl md:text-2xl text-card-text mb-2">
+                Piazza x EunifiedWorld
+              </p>
+
+              {/* Main Title */}
+              <h1 className="font-cursive text-6xl md:text-7xl lg:text-8xl text-card-text mb-8 leading-tight">
+                Valentines Bouquet
+              </h1>
+
+              {/* Order Button */}
+              <Link
+                href="/customize"
+                className="inline-block bg-deep-red text-white font-serif text-lg px-12 py-4 rounded-full hover:bg-red-800 transition-colors mb-6"
+              >
+                Order now
+              </Link>
+
+              {/* How it works link */}
+              <div>
+                <Link
+                  href="/customize"
+                  className="font-serif text-card-text underline hover:opacity-70 transition-opacity"
+                >
+                  How does this work?
+                </Link>
+              </div>
+            </div>
           </div>
 
-          {/* Main heading */}
-          <h1 className="font-cursive text-6xl md:text-7xl text-cream-white mb-4 drop-shadow-lg">
-            Valentine&apos;s Day
-          </h1>
-          <h2 className="font-cursive text-4xl md:text-5xl text-soft-pink mb-8 drop-shadow-md">
-            Flower Delivery
-          </h2>
+          {/* Right Side - Bouquet Image */}
+          <div className="hidden md:block flex-1 relative">
+            <div className="absolute inset-0 flex items-center justify-end">
+              <Image
+                src="/bouquet-hero.png"
+                alt="Beautiful rose bouquet"
+                width={800}
+                height={900}
+                className="object-cover object-left h-full w-auto max-w-none"
+                priority
+              />
+            </div>
+          </div>
+        </div>
 
-          {/* Bouquet preview */}
-          <div className="my-8">
+        {/* Product Preview Image - Bottom Left */}
+        <div className="absolute bottom-8 left-1/4 transform -translate-x-1/2 z-10">
+          <div
+            className="bg-white p-2 rounded-lg shadow-lg"
+            style={{ transform: 'rotate(-5deg)' }}
+          >
             <Image
-              src="/bouquet-red.png"
-              alt="Beautiful red rose bouquet"
+              src="/letter-preview.png"
+              alt="Letter preview"
               width={300}
-              height={375}
-              className="mx-auto drop-shadow-2xl"
-              priority
+              height={200}
+              className="rounded-md"
             />
           </div>
-
-          {/* Subtext */}
-          <p className="font-cursive text-2xl text-cream-white mb-8 drop-shadow-md">
-            Send your love with a beautiful bouquet
-            <br />
-            and a personalized letter
-          </p>
-
-          {/* CTA Button */}
-          <Link
-            href="/customize"
-            className="inline-block btn-pill text-2xl px-10 py-4 hover:scale-105 transform transition-all"
-          >
-            Create Your Bouquet
-          </Link>
-
-          {/* Price info */}
-          <p className="font-cursive text-xl text-cream-white mt-6 opacity-80">
-            Starting at $80
-          </p>
-        </div>
-
-        {/* Footer decorations */}
-        <div className="absolute bottom-8 flex gap-8 opacity-50">
-          <span className="text-2xl text-cream-white">&#x2665;</span>
-          <span className="text-2xl text-soft-pink">&#x2665;</span>
-          <span className="text-2xl text-cream-white">&#x2665;</span>
         </div>
       </div>
-    </Layout>
+    </>
   );
 }

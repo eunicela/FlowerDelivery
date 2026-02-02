@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Lora:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,12 +8,13 @@
   --deep-red: #722F37;
   --soft-pink: #F4C2C2;
   --cream-white: #FFFEF9;
+  --beige: #E8E0D5;
   --card-bg: #FFFFFF;
   --card-text: #2C2C2C;
 }
 
 body {
-  font-family: 'Caveat', 'Dancing Script', cursive;
+  font-family: 'Lora', Georgia, serif;
 }
 
 /* Custom scrollbar for a cozy feel */
