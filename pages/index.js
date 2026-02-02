@@ -66,7 +66,7 @@ export default function Home() {
 
           {/* Right Side - Bouquet Image */}
           <div className="hidden md:block flex-1 relative">
-            <div className="absolute inset-0 flex items-end justify-center">
+            <div className="absolute inset-0 flex items-end justify-center -translate-x-12">
               <Image
                 src="/bouquet-hero.png"
                 alt="Beautiful rose bouquet"

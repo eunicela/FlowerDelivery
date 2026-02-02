@@ -143,6 +143,46 @@ export default function Customize() {
               <p className="font-serif text-base text-gray-600 mt-4 text-center">
                 The bouquet is carefully boxed, and the stems are wrapped in moist cotton so the flowers stay fresh during shipping.
               </p>
+
+              {/* Bouquet Color Options */}
+              <div className="mt-8 grid grid-cols-3 gap-4">
+                <div className="text-center">
+                  <div className="rounded-lg overflow-hidden mb-2">
+                    <Image
+                      src="/real-red-bouquet.png"
+                      alt="Red bouquet"
+                      width={200}
+                      height={200}
+                      className="w-full h-auto object-cover"
+                    />
+                  </div>
+                  <p className="font-serif text-sm text-gray-600">Red</p>
+                </div>
+                <div className="text-center">
+                  <div className="rounded-lg overflow-hidden mb-2">
+                    <Image
+                      src="/real-pink-bouquet.png"
+                      alt="Pink bouquet"
+                      width={200}
+                      height={200}
+                      className="w-full h-auto object-cover"
+                    />
+                  </div>
+                  <p className="font-serif text-sm text-gray-600">Pink</p>
+                </div>
+                <div className="text-center">
+                  <div className="rounded-lg overflow-hidden mb-2">
+                    <Image
+                      src="/real-white-bouquet.png"
+                      alt="White bouquet"
+                      width={200}
+                      height={200}
+                      className="w-full h-auto object-cover"
+                    />
+                  </div>
+                  <p className="font-serif text-sm text-gray-600">White</p>
+                </div>
+              </div>
             </div>
           </div>
         )}
