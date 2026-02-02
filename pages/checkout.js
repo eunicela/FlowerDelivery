@@ -102,16 +102,6 @@ export default function Checkout() {
     }
   };
 
-  const formatDate = (date) => {
-    if (!date) return '';
-    return new Date(date).toLocaleDateString('en-US', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-  };
-
   // Calculate minimum delivery date (2 days from now)
   const minDate = new Date();
   minDate.setDate(minDate.getDate() + 2);
