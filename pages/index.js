@@ -67,21 +67,20 @@ export default function Home() {
           {/* Right Side - Bouquet Image */}
           <div className="hidden md:block flex-1 relative">
             <div className="absolute inset-0 flex items-center justify-end">
-              {/* Replace with bouquet-hero.png when available */}
               <Image
-                src="/bouquet-red.svg"
+                src="/bouquet-hero.png"
                 alt="Beautiful rose bouquet"
-                width={500}
-                height={600}
-                className="object-contain"
+                width={800}
+                height={900}
+                className="object-cover object-left h-full w-auto max-w-none"
                 priority
               />
             </div>
           </div>
         </div>
 
-        {/* Product Preview Image - Bottom Left (uncomment when product-preview.png is available) */}
-        {/* <div className="absolute bottom-8 left-1/4 transform -translate-x-1/2 z-10">
+        {/* Product Preview Image - Bottom Left */}
+        <div className="absolute bottom-8 left-1/4 transform -translate-x-1/2 z-10">
           <div
             className="bg-white p-2 rounded-lg shadow-lg"
             style={{ transform: 'rotate(-5deg)' }}
@@ -94,7 +93,7 @@ export default function Home() {
               className="rounded-md"
             />
           </div>
-        </div> */}
+        </div>
       </div>
     </>
   );
