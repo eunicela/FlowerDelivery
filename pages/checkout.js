@@ -277,11 +277,6 @@ export default function Checkout() {
                   required
                   className="w-full p-2 border rounded-lg font-sans text-sm focus:border-deep-red outline-none"
                 />
-                {deliveryInfo.date && (
-                  <p className="font-sans text-xs text-gray-500">
-                    {formatDate(deliveryInfo.date)}
-                  </p>
-                )}
               </div>
 
               {/* Submit Button */}
