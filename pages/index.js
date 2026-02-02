@@ -66,21 +66,21 @@ export default function Home() {
 
           {/* Right Side - Bouquet Image */}
           <div className="hidden md:block flex-1 relative">
-            <div className="absolute inset-0 flex items-center justify-end">
+            <div className="absolute inset-0 flex items-end justify-center -translate-x-12">
               <Image
                 src="/bouquet-hero.png"
                 alt="Beautiful rose bouquet"
-                width={800}
-                height={900}
-                className="object-cover object-left h-full w-auto max-w-none"
+                width={700}
+                height={800}
+                className="object-contain max-h-[90vh]"
                 priority
               />
             </div>
           </div>
         </div>
 
-        {/* Product Preview Image - Bottom Left */}
-        <div className="absolute bottom-8 left-1/4 transform -translate-x-1/2 z-10">
+        {/* Letter Preview Image - Bottom Center */}
+        <div className="absolute bottom-24 left-1/3 transform -translate-x-1/2 z-10">
           <div
             className="bg-white p-2 rounded-lg shadow-lg"
             style={{ transform: 'rotate(-5deg)' }}
@@ -88,8 +88,8 @@ export default function Home() {
             <Image
               src="/letter-preview.png"
               alt="Letter preview"
-              width={300}
-              height={200}
+              width={280}
+              height={180}
               className="rounded-md"
             />
           </div>
