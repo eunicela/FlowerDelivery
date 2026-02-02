@@ -61,3 +61,22 @@ body {
 .price-tag {
   @apply font-cursive text-white text-2xl drop-shadow-lg;
 }
+
+/* Horizontal scrollbar styling */
+::-webkit-scrollbar:horizontal {
+  height: 8px;
+}
+
+/* Horizontal bounce animation for scroll indicator */
+@keyframes bounce-x {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(25%);
+  }
+}
+
+.animate-bounce-x {
+  animation: bounce-x 1s ease-in-out infinite;
+}
