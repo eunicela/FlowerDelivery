@@ -42,7 +42,7 @@ export default function Customize() {
                 </div>
               )}
 
-              {/* Add Letter Button with Price and Checkout */}
+              {/* Add Letter Button with Price */}
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => toggleCardIncluded(firstCard?.id)}
@@ -54,12 +54,6 @@ export default function Customize() {
                 <span className="font-cursive text-xl text-cream-white drop-shadow-lg font-bold">
                   +$5
                 </span>
-                <Link
-                  href="/checkout"
-                  className="btn-pill text-lg px-6 py-2 hover:scale-105 transform transition-all inline-block"
-                >
-                  Checkout
-                </Link>
               </div>
             </div>
 
@@ -78,7 +72,7 @@ export default function Customize() {
               {/* Help button */}
               <button
                 onClick={() => setShowHelp(true)}
-                className="absolute left-4 bottom-24 w-10 h-10 rounded-full bg-cream-white text-card-text font-cursive text-xl flex items-center justify-center shadow-md hover:shadow-lg transition-shadow"
+                className="absolute left-4 bottom-24 w-10 h-10 rounded-full bg-cream-white text-card-text font-cursive text-xl font-bold flex items-center justify-center shadow-md hover:shadow-lg transition-shadow"
                 aria-label="Help"
               >
                 ?
@@ -86,6 +80,14 @@ export default function Customize() {
             </div>
           </div>
         </div>
+
+        {/* Checkout Button - Fixed bottom right, aligned with add card button */}
+        <Link
+          href="/checkout"
+          className="fixed bottom-20 right-8 btn-pill text-lg px-6 py-2 hover:scale-105 transform transition-all inline-block z-40"
+        >
+          Checkout
+        </Link>
 
         {/* Help Modal */}
         {showHelp && (

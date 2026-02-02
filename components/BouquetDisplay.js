@@ -22,7 +22,7 @@ export default function BouquetDisplay() {
       />
       {/* Price tag */}
       <div className="absolute bottom-32 right-0 price-tag">
-        <span className="font-cursive text-3xl text-white drop-shadow-lg">$80</span>
+        <span className="font-cursive text-3xl text-white drop-shadow-lg font-bold">$80</span>
       </div>
     </div>
   );

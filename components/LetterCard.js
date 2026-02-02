@@ -71,7 +71,7 @@ export default function LetterCard({ card, showRemove = false, isLocked = true }
           value={card.senderName}
           onChange={(e) => handleChange('senderName', e.target.value)}
           disabled={isLocked}
-          className="font-cursive text-xl text-card-text italic bg-transparent border-b border-gray-300 focus:border-deep-red outline-none w-24 text-right disabled:cursor-default"
+          className="font-cursive text-xl text-card-text italic bg-transparent border-b border-gray-300 focus:border-deep-red outline-none w-24 text-left disabled:cursor-default"
         />
       </div>
     </div>

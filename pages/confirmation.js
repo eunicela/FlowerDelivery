@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import Link from 'next/link';
-import Layout from '../components/Layout';
+import Image from 'next/image';
 import StatusTracker from '../components/StatusTracker';
 import { useStore } from '../lib/store';
 
@@ -21,7 +22,7 @@ export default function Confirmation() {
       // In a real app, you'd fetch order details from the API
       // For now, we'll show a generic confirmation
       setOrderDetails({
-        orderNumber: 'VAL-2025-XXXX',
+        orderNumber: 'XXXX XXXX',
         status: 'preparing',
       });
       setLoading(false);
@@ -30,129 +31,125 @@ export default function Confirmation() {
 
   if (loading && session_id) {
     return (
-      <Layout title="Order Confirmation">
-        <div className="min-h-screen px-8 md:px-16 lg:px-24 flex items-center justify-center">
-          <div className="card p-8 text-center">
-            <p className="font-cursive text-2xl text-card-text">
+      <>
+        <Head>
+          <title>Order Confirmation</title>
+        </Head>
+        <div
+          className="min-h-screen flex items-center justify-center"
+          style={{
+            backgroundImage: 'url(/wood-bg.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="bg-[#f5f0e8] rounded-2xl p-8 text-center shadow-lg">
+            <p className="font-cursive text-2xl text-[#4a4a4a]">
               Loading your order details...
             </p>
           </div>
         </div>
-      </Layout>
+      </>
     );
   }
 
   if (!session_id) {
     return (
-      <Layout title="Order Confirmation">
-        <div className="min-h-screen px-8 md:px-16 lg:px-24 flex items-center justify-center">
-          <div className="card p-8 text-center">
-            <p className="font-cursive text-2xl text-card-text mb-4">
+      <>
+        <Head>
+          <title>Order Confirmation</title>
+        </Head>
+        <div
+          className="min-h-screen flex items-center justify-center"
+          style={{
+            backgroundImage: 'url(/wood-bg.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="bg-[#f5f0e8] rounded-2xl p-8 text-center shadow-lg">
+            <p className="font-cursive text-2xl text-[#4a4a4a] mb-4">
               No order found
             </p>
-            <Link href="/" className="btn-pill text-xl">
+            <Link
+              href="/"
+              className="inline-block bg-deep-red text-white px-6 py-2 rounded-full font-cursive text-xl hover:opacity-90 transition-opacity"
+            >
               Go Home
             </Link>
           </div>
         </div>
-      </Layout>
+      </>
     );
   }
 
   return (
-    <Layout title="Order Confirmed - Valentine's Flower Delivery">
-      <div className="min-h-screen py-12 px-8 md:px-16 lg:px-24 flex flex-col justify-center">
-        <div className="max-w-2xl mx-auto w-full">
-          {/* Success Card */}
-          <div className="card p-8 text-center mb-8">
-            {/* Checkmark */}
-            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-green-100 flex items-center justify-center">
-              <svg
-                className="w-10 h-10 text-green-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            </div>
-
-            <h1 className="font-cursive text-5xl text-deep-red mb-4">
-              Thank You!
-            </h1>
-            <p className="font-cursive text-2xl text-card-text mb-2">
-              Your order has been placed successfully
-            </p>
-            <p className="font-cursive text-xl text-gray-500 mb-6">
-              Order #{orderDetails?.orderNumber || 'Processing...'}
-            </p>
-
-            {/* Hearts decoration */}
-            <div className="flex justify-center gap-2 mb-8">
-              <span className="text-2xl text-deep-red">&#x2665;</span>
-              <span className="text-2xl text-soft-pink">&#x2665;</span>
-              <span className="text-2xl text-deep-red">&#x2665;</span>
-            </div>
-
-            {/* Status Tracker */}
-            <div className="mb-8">
-              <h3 className="font-cursive text-xl text-card-text mb-4">
-                Order Status
-              </h3>
-              <StatusTracker currentStatus={orderDetails?.status || 'pending'} />
-            </div>
-
-            {/* Order Summary */}
-            <div className="text-left bg-gray-50 rounded-lg p-6 mb-6">
-              <h3 className="font-cursive text-xl text-card-text mb-3">
-                What happens next?
-              </h3>
-              <ul className="font-cursive text-lg text-gray-600 space-y-2">
-                <li className="flex items-start gap-2">
-                  <span className="text-deep-red">1.</span>
-                  We&apos;ll prepare your beautiful bouquet with love
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-deep-red">2.</span>
-                  Your personalized letter will be carefully attached
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-deep-red">3.</span>
-                  Your order will be delivered on your selected date
-                </li>
-              </ul>
-            </div>
-
-            {/* Contact Info */}
-            <div className="border-t pt-6">
-              <p className="font-cursive text-lg text-gray-500">
-                Questions about your order?
-              </p>
-              <p className="font-cursive text-lg text-deep-red">
-                Contact us at{' '}
-                <a href="mailto:hello@valentineflowers.com" className="underline">
-                  hello@valentineflowers.com
-                </a>
-              </p>
-            </div>
+    <>
+      <Head>
+        <title>Order Confirmed - Valentine&apos;s Flower Delivery</title>
+      </Head>
+      <div
+        className="min-h-screen flex items-center justify-center py-16 px-4"
+        style={{
+          backgroundImage: 'url(/wood-bg.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        {/* Centered Card with slight rotation */}
+        <div
+          className="relative bg-[#f5f0e8] rounded-2xl p-8 pt-16 text-center shadow-xl max-w-md w-full"
+        >
+          {/* Stamp Logo overlapping top */}
+          <div
+            className="absolute left-1/2 -translate-x-1/2 -top-12 w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg bg-white"
+          >
+            <Image
+              src="/piazza-logo.png"
+              alt="Piazza Logo"
+              width={96}
+              height={96}
+              className="w-full h-full object-cover"
+            />
           </div>
 
-          {/* Back to Home */}
-          <div className="text-center">
-            <Link
-              href="/"
-              className="btn-pill text-xl inline-block hover:scale-105 transform transition-all"
-            >
-              Back to Home
-            </Link>
+          {/* Thank You Text */}
+          <h1 className="font-cursive text-5xl text-deep-red mb-3">
+            Thank you!
+          </h1>
+
+          {/* Confirmation Message */}
+          <p className="font-serif text-lg text-[#3a3a3a] mb-2">
+            Your order has been placed successfully
+          </p>
+
+          {/* Order Number */}
+          <p className="text-gray-400 text-sm mb-8">
+            Order # {orderDetails?.orderNumber || 'Processing...'}
+          </p>
+
+          {/* Status Tracker */}
+          <div className="mb-8">
+            <StatusTracker currentStatus={orderDetails?.status || 'pending'} />
+          </div>
+
+          {/* Contact Section */}
+          <div className="border-t border-gray-300 pt-6">
+            <p className="text-gray-500 text-sm">
+              Questions about your order?
+            </p>
+            <p className="text-sm">
+              Contact us at{' '}
+              <a
+                href="mailto:piazzawholesale@gmail.com"
+                className="text-deep-red underline"
+              >
+                piazzawholesale@gmail.com
+              </a>
+            </p>
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 }

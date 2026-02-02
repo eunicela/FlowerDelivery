@@ -105,7 +105,7 @@ export default function Checkout() {
         <div className="max-w-4xl mx-auto w-full">
           <Link
             href="/customize"
-            className="font-sans text-sm text-cream-white hover:text-soft-pink mb-4 inline-block"
+            className="font-serif text-sm text-cream-white hover:text-soft-pink mb-4 inline-block"
           >
             &larr; Back to customization
           </Link>
@@ -113,7 +113,7 @@ export default function Checkout() {
           <div className="grid md:grid-cols-2 gap-4">
             {/* Order Summary */}
             <div className="card p-4">
-              <h2 className="font-sans font-semibold text-xl text-card-text mb-4">
+              <h2 className="font-serif font-semibold text-xl text-card-text mb-4">
                 Order Summary
               </h2>
 
@@ -125,13 +125,13 @@ export default function Checkout() {
                   width={60}
                   height={75}
                 />
-                <div>
-                  <p className="font-sans text-sm text-card-text">
+                <div className="flex-1">
+                  <p className="font-serif text-sm text-card-text">
                     {flowerColor.charAt(0).toUpperCase() + flowerColor.slice(1)} Rose
                     Bouquet
                   </p>
-                  <p className="font-sans text-sm text-gray-500">$80.00</p>
                 </div>
+                <p className="font-serif text-sm text-card-text">$80.00</p>
               </div>
 
               {/* Cards */}
@@ -147,24 +147,24 @@ export default function Checkout() {
                         className="object-cover rounded"
                       />
                     ) : (
-                      <span className="font-sans text-xs text-gray-400">Card</span>
+                      <span className="font-serif text-xs text-gray-400">Card</span>
                     )}
                   </div>
                   <div className="flex-1">
-                    <p className="font-sans text-sm text-card-text">
+                    <p className="font-serif text-sm text-card-text">
                       Letter Card {index + 1}
                     </p>
-                    <p className="font-sans text-xs text-gray-500 truncate">
+                    <p className="font-serif text-xs text-gray-500 truncate">
                       To: {card.recipientName || 'Not specified'}
                     </p>
                   </div>
-                  <p className="font-sans text-sm text-card-text">$5.00</p>
+                  <p className="font-serif text-sm text-card-text">$5.00</p>
                 </div>
               ))}
 
               {/* Total */}
               <div className="pt-3">
-                <div className="flex justify-between font-sans font-semibold text-lg text-card-text">
+                <div className="flex justify-between font-serif font-semibold text-lg text-card-text">
                   <span>Total</span>
                   <span>{getTotalFormatted()}</span>
                 </div>
@@ -173,26 +173,26 @@ export default function Checkout() {
 
             {/* Customer & Delivery Form */}
             <form onSubmit={handleSubmit} className="card p-4">
-              <h2 className="font-sans font-semibold text-xl text-card-text mb-4">
+              <h2 className="font-serif font-semibold text-xl text-card-text mb-4">
                 Delivery Details
               </h2>
 
               {error && (
-                <div className="bg-red-100 border border-red-400 text-red-700 px-3 py-2 rounded mb-3 font-sans text-sm">
+                <div className="bg-red-100 border border-red-400 text-red-700 px-3 py-2 rounded mb-3 font-serif text-sm">
                   {error}
                 </div>
               )}
 
               {/* Customer Info */}
               <div className="space-y-2 mb-4">
-                <h3 className="font-sans font-medium text-sm text-card-text">Your Information</h3>
+                <h3 className="font-serif font-medium text-sm text-card-text">Your Information</h3>
                 <input
                   type="text"
                   placeholder="Full Name"
                   value={customerInfo.name}
                   onChange={(e) => setCustomerInfo({ name: e.target.value })}
                   required
-                  className="w-full p-2 border rounded-lg font-sans text-sm focus:border-deep-red outline-none"
+                  className="w-full p-2 border rounded-lg font-serif text-sm focus:border-deep-red outline-none"
                 />
                 <input
                   type="email"
@@ -200,7 +200,7 @@ export default function Checkout() {
                   value={customerInfo.email}
                   onChange={(e) => setCustomerInfo({ email: e.target.value })}
                   required
-                  className="w-full p-2 border rounded-lg font-sans text-sm focus:border-deep-red outline-none"
+                  className="w-full p-2 border rounded-lg font-serif text-sm focus:border-deep-red outline-none"
                 />
                 <input
                   type="tel"
@@ -208,20 +208,20 @@ export default function Checkout() {
                   value={customerInfo.phone}
                   onChange={(e) => setCustomerInfo({ phone: e.target.value })}
                   required
-                  className="w-full p-2 border rounded-lg font-sans text-sm focus:border-deep-red outline-none"
+                  className="w-full p-2 border rounded-lg font-serif text-sm focus:border-deep-red outline-none"
                 />
               </div>
 
               {/* Delivery Address */}
               <div className="space-y-2 mb-4">
-                <h3 className="font-sans font-medium text-sm text-card-text">Delivery Address</h3>
+                <h3 className="font-serif font-medium text-sm text-card-text">Delivery Address</h3>
                 <input
                   type="text"
                   placeholder="Street Address"
                   value={deliveryInfo.street}
                   onChange={(e) => setDeliveryInfo({ street: e.target.value })}
                   required
-                  className="w-full p-2 border rounded-lg font-sans text-sm focus:border-deep-red outline-none"
+                  className="w-full p-2 border rounded-lg font-serif text-sm focus:border-deep-red outline-none"
                 />
                 <div className="grid grid-cols-2 gap-2">
                   <input
@@ -230,7 +230,7 @@ export default function Checkout() {
                     value={deliveryInfo.city}
                     onChange={(e) => setDeliveryInfo({ city: e.target.value })}
                     required
-                    className="p-2 border rounded-lg font-sans text-sm focus:border-deep-red outline-none"
+                    className="p-2 border rounded-lg font-serif text-sm focus:border-deep-red outline-none"
                   />
                   <input
                     type="text"
@@ -238,7 +238,7 @@ export default function Checkout() {
                     value={deliveryInfo.state}
                     onChange={(e) => setDeliveryInfo({ state: e.target.value })}
                     required
-                    className="p-2 border rounded-lg font-sans text-sm focus:border-deep-red outline-none"
+                    className="p-2 border rounded-lg font-serif text-sm focus:border-deep-red outline-none"
                   />
                 </div>
                 <input
@@ -247,20 +247,20 @@ export default function Checkout() {
                   value={deliveryInfo.zip}
                   onChange={(e) => setDeliveryInfo({ zip: e.target.value })}
                   required
-                  className="w-full p-2 border rounded-lg font-sans text-sm focus:border-deep-red outline-none"
+                  className="w-full p-2 border rounded-lg font-serif text-sm focus:border-deep-red outline-none"
                 />
               </div>
 
               {/* Delivery Date */}
               <div className="space-y-2 mb-4">
-                <h3 className="font-sans font-medium text-sm text-card-text">Delivery Date</h3>
+                <h3 className="font-serif font-medium text-sm text-card-text">Delivery Date</h3>
                 <input
                   type="date"
                   value={deliveryInfo.date}
                   onChange={(e) => setDeliveryInfo({ date: e.target.value })}
                   min={minDateStr}
                   required
-                  className="w-full p-2 border rounded-lg font-sans text-sm focus:border-deep-red outline-none"
+                  className="w-full p-2 border rounded-lg font-serif text-sm focus:border-deep-red outline-none"
                 />
               </div>
 
@@ -273,7 +273,7 @@ export default function Checkout() {
                 {isLoading ? 'Processing...' : 'Pay with Stripe'}
               </button>
 
-              <p className="font-sans text-center text-gray-500 mt-2 text-xs">
+              <p className="font-serif text-center text-gray-500 mt-2 text-xs">
                 Secure payment powered by Stripe
               </p>
             </form>

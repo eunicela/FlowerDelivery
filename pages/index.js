@@ -12,7 +12,16 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="min-h-screen bg-beige relative overflow-hidden">
+      <div className="min-h-screen relative overflow-hidden">
+        {/* Background Image */}
+        <Image
+          src="/home-background.png"
+          alt="Valentine's bouquet background"
+          fill
+          className="object-cover"
+          priority
+        />
+
         {/* Navigation */}
         <nav className="absolute top-0 left-0 p-8 z-20">
           <ul className="flex gap-8 font-serif text-lg text-card-text">
@@ -30,9 +39,9 @@ export default function Home() {
         </nav>
 
         {/* Main Content */}
-        <div className="min-h-screen flex">
+        <div className="min-h-screen flex relative z-10">
           {/* Left Side - Text Content */}
-          <div className="flex-1 flex flex-col justify-center px-8 md:px-16 lg:px-20 z-10">
+          <div className="flex-1 flex flex-col justify-center px-8 md:px-16 lg:px-20">
             <div className="max-w-lg">
               {/* Subtitle */}
               <p className="font-serif text-xl md:text-2xl text-card-text mb-2">
@@ -62,36 +71,6 @@ export default function Home() {
                 </Link>
               </div>
             </div>
-          </div>
-
-          {/* Right Side - Bouquet Image */}
-          <div className="hidden md:block flex-1 relative">
-            <div className="absolute inset-0 flex items-end justify-center -translate-x-12">
-              <Image
-                src="/bouquet-hero.png"
-                alt="Beautiful rose bouquet"
-                width={700}
-                height={800}
-                className="object-contain max-h-[90vh]"
-                priority
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Letter Preview Image - Bottom Center */}
-        <div className="absolute bottom-24 left-1/3 transform -translate-x-1/2 z-10">
-          <div
-            className="bg-white p-2 rounded-lg shadow-lg"
-            style={{ transform: 'rotate(-5deg)' }}
-          >
-            <Image
-              src="/letter-preview.png"
-              alt="Letter preview"
-              width={280}
-              height={180}
-              className="rounded-md"
-            />
           </div>
         </div>
       </div>
