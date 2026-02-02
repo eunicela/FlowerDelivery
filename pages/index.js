@@ -5,7 +5,7 @@ import Image from 'next/image';
 export default function Home() {
   return (
     <Layout title="Valentine's Flower Delivery - Send Love">
-      <div className="min-h-screen flex flex-col items-center justify-center px-4">
+      <div className="min-h-screen flex flex-col items-center justify-center px-4 relative">
         {/* Hero Section */}
         <div className="text-center max-w-2xl">
           {/* Decorative hearts */}
@@ -45,7 +45,7 @@ export default function Home() {
           {/* CTA Button */}
           <Link
             href="/customize"
-            className="inline-block btn-pill text-2xl px-10 py-4 hover:scale-105 transform transition-all"
+            className="inline-block btn-pill text-2xl px-10 py-4 hover:scale-105 transform transition-all relative z-10"
           >
             Create Your Bouquet
           </Link>
