@@ -9,25 +9,12 @@ import ColorSelector from '../components/ColorSelector';
 import { useStore } from '../lib/store';
 
 export default function Customize() {
-  const { cards } = useStore();
+  const { cards, toggleCardIncluded } = useStore();
   const [showHelp, setShowHelp] = useState(false);
-  const [unlockedCardIds, setUnlockedCardIds] = useState(new Set());
-
-  const toggleCardLock = (cardId) => {
-    setUnlockedCardIds((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(cardId)) {
-        newSet.delete(cardId);
-      } else {
-        newSet.add(cardId);
-      }
-      return newSet;
-    });
-  };
 
   // For the first card, use a simple toggle
   const firstCard = cards[0];
-  const isFirstCardLocked = !unlockedCardIds.has(firstCard?.id);
+  const isFirstCardLocked = !firstCard?.isIncluded;
 
   return (
     <Layout title="Customize Your Bouquet">
@@ -58,7 +45,7 @@ export default function Customize() {
               {/* Add Letter Button with Price */}
               <div className="flex items-center gap-3">
                 <button
-                  onClick={() => toggleCardLock(firstCard?.id)}
+                  onClick={() => toggleCardIncluded(firstCard?.id)}
                   className="btn-pill text-lg flex items-center gap-2"
                 >
                   <span className="text-xl">{isFirstCardLocked ? '+' : '-'}</span>

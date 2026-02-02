@@ -22,6 +22,9 @@ export default function Checkout() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
+  // Only show cards that are included in the order
+  const includedCards = cards.filter((card) => card.isIncluded);
+
   const bouquetImages = {
     red: '/bouquet-red.png',
     pink: '/bouquet-pink.png',
@@ -34,9 +37,9 @@ export default function Checkout() {
     setError('');
 
     try {
-      // Upload images first
+      // Upload images first (only for included cards)
       const uploadedCards = await Promise.all(
-        cards.map(async (card) => {
+        includedCards.map(async (card) => {
           let imageUrl = null;
           if (card.imageFile) {
             const formData = new FormData();
@@ -150,7 +153,7 @@ export default function Checkout() {
               </div>
 
               {/* Cards */}
-              {cards.map((card, index) => (
+              {includedCards.map((card, index) => (
                 <div key={card.id} className="flex items-center gap-3 py-3 border-b">
                   <div className="w-14 h-11 bg-gray-100 rounded flex items-center justify-center">
                     {card.imageUrl ? (
