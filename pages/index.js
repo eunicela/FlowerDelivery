@@ -86,8 +86,8 @@ export default function Home() {
             style={{ transform: 'rotate(-5deg)' }}
           >
             <Image
-              src="/product-preview.png"
-              alt="Product preview"
+              src="/letter-preview.png"
+              alt="Letter preview"
               width={300}
               height={200}
               className="rounded-md"
