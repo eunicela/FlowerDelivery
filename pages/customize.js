@@ -110,10 +110,10 @@ export default function Customize() {
                 &times;
               </button>
 
-              <h3 className="font-cursive text-4xl text-card-text mb-6">
+              <h3 className="font-serif text-3xl text-card-text mb-6">
                 How It Works
               </h3>
-              <ul className="font-cursive text-xl text-card-text space-y-4">
+              <ul className="font-serif text-lg text-card-text space-y-4">
                 <li>
                   <span className="text-deep-red">1.</span> Click &quot;add card&quot; to unlock the card
                 </li>
@@ -140,7 +140,7 @@ export default function Customize() {
               </div>
 
               {/* Caption */}
-              <p className="font-cursive text-lg text-gray-600 mt-4 text-center">
+              <p className="font-serif text-base text-gray-600 mt-4 text-center">
                 The bouquet is carefully boxed, and the stems are wrapped in moist cotton so the flowers stay fresh during shipping.
               </p>
             </div>
