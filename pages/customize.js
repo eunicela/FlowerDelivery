@@ -42,7 +42,7 @@ export default function Customize() {
                 </div>
               )}
 
-              {/* Add Letter Button with Price */}
+              {/* Add Letter Button with Price and Checkout */}
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => toggleCardIncluded(firstCard?.id)}
@@ -51,9 +51,15 @@ export default function Customize() {
                   <span className="text-xl">{isFirstCardLocked ? '+' : '-'}</span>
                   {isFirstCardLocked ? 'add card' : 'remove card'}
                 </button>
-                <span className="font-cursive text-xl text-cream-white drop-shadow-lg">
+                <span className="font-cursive text-xl text-cream-white drop-shadow-lg font-bold">
                   +$5
                 </span>
+                <Link
+                  href="/checkout"
+                  className="btn-pill text-lg px-6 py-2 hover:scale-105 transform transition-all inline-block"
+                >
+                  Checkout
+                </Link>
               </div>
             </div>
 
@@ -77,16 +83,6 @@ export default function Customize() {
               >
                 ?
               </button>
-
-              {/* Checkout button */}
-              <div className="mt-8 lg:absolute lg:bottom-8 lg:right-8">
-                <Link
-                  href="/checkout"
-                  className="btn-pill text-2xl px-8 py-3 hover:scale-105 transform transition-all inline-block"
-                >
-                  Checkout
-                </Link>
-              </div>
             </div>
           </div>
         </div>
@@ -98,22 +94,22 @@ export default function Customize() {
             onClick={() => setShowHelp(false)}
           >
             <div
-              className="card p-8 max-w-2xl w-full relative"
+              className="card p-6 max-w-4xl w-full relative max-h-[80vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close button */}
               <button
                 onClick={() => setShowHelp(false)}
-                className="absolute top-4 right-4 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-card-text text-xl flex items-center justify-center transition-colors"
+                className="absolute top-3 right-3 w-7 h-7 rounded-full bg-gray-100 hover:bg-gray-200 text-card-text text-lg flex items-center justify-center transition-colors"
                 aria-label="Close"
               >
                 &times;
               </button>
 
-              <h3 className="font-serif text-3xl text-card-text mb-6">
+              <h3 className="font-serif text-xl text-card-text mb-4">
                 How It Works
               </h3>
-              <ul className="font-serif text-lg text-card-text space-y-4">
+              <ul className="font-serif text-sm text-card-text space-y-2">
                 <li>
                   <span className="text-deep-red">1.</span> Click &quot;add card&quot; to unlock the card
                 </li>
@@ -129,7 +125,7 @@ export default function Customize() {
               </ul>
 
               {/* Product Image */}
-              <div className="mt-6 rounded-lg overflow-hidden">
+              <div className="mt-4 rounded-lg overflow-hidden">
                 <Image
                   src="/product-preview.png"
                   alt="Valentine's bouquet with card"
@@ -140,14 +136,14 @@ export default function Customize() {
               </div>
 
               {/* Caption */}
-              <p className="font-serif text-base text-gray-600 mt-4 text-center">
+              <p className="font-serif text-xs text-gray-600 mt-3 text-center">
                 The bouquet is carefully boxed, and the stems are wrapped in moist cotton so the flowers stay fresh during shipping.
               </p>
 
               {/* Bouquet Color Options */}
-              <div className="mt-8 grid grid-cols-3 gap-4">
+              <div className="mt-5 grid grid-cols-3 gap-3">
                 <div className="text-center">
-                  <div className="rounded-lg overflow-hidden mb-2">
+                  <div className="rounded-lg overflow-hidden mb-1">
                     <Image
                       src="/real-red-bouquet.png"
                       alt="Red bouquet"
@@ -156,10 +152,10 @@ export default function Customize() {
                       className="w-full h-auto object-cover"
                     />
                   </div>
-                  <p className="font-serif text-sm text-gray-600">Red</p>
+                  <p className="font-serif text-xs text-gray-600">Red</p>
                 </div>
                 <div className="text-center">
-                  <div className="rounded-lg overflow-hidden mb-2">
+                  <div className="rounded-lg overflow-hidden mb-1">
                     <Image
                       src="/real-pink-bouquet.png"
                       alt="Pink bouquet"
@@ -168,10 +164,10 @@ export default function Customize() {
                       className="w-full h-auto object-cover"
                     />
                   </div>
-                  <p className="font-serif text-sm text-gray-600">Pink</p>
+                  <p className="font-serif text-xs text-gray-600">Pink</p>
                 </div>
                 <div className="text-center">
-                  <div className="rounded-lg overflow-hidden mb-2">
+                  <div className="rounded-lg overflow-hidden mb-1">
                     <Image
                       src="/real-white-bouquet.png"
                       alt="White bouquet"
@@ -180,7 +176,7 @@ export default function Customize() {
                       className="w-full h-auto object-cover"
                     />
                   </div>
-                  <p className="font-serif text-sm text-gray-600">White</p>
+                  <p className="font-serif text-xs text-gray-600">White</p>
                 </div>
               </div>
             </div>
