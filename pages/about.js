@@ -12,9 +12,9 @@ export default function About() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="h-screen w-screen bg-beige overflow-x-auto overflow-y-hidden">
+      <div className="min-h-screen w-full bg-beige overflow-y-auto">
         {/* Navigation */}
-        <nav className="fixed top-0 left-0 p-8 z-20">
+        <nav className="fixed top-0 left-0 right-0 p-8 z-20 bg-beige/80 backdrop-blur-sm">
           <ul className="flex gap-8 font-serif text-lg text-card-text">
             <li>
               <Link href="/" className="hover:opacity-70 transition-opacity">
@@ -29,18 +29,10 @@ export default function About() {
           </ul>
         </nav>
 
-        {/* Scroll Indicator */}
-        <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex items-center gap-2 text-card-text font-serif text-sm">
-          <span>Scroll</span>
-          <svg className="w-6 h-6 animate-bounce-x" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-          </svg>
-        </div>
-
-        {/* Horizontal Scroll Container */}
-        <div className="h-full flex snap-x snap-mandatory scroll-smooth">
+        {/* Vertical Scroll Container */}
+        <div className="flex flex-col snap-y snap-mandatory scroll-smooth">
           {/* Section 1 - Welcome */}
-          <section className="flex-shrink-0 w-screen h-full snap-start flex items-center justify-center px-8 md:px-16">
+          <section className="w-full min-h-screen snap-start flex items-center justify-center px-8 md:px-16">
             <div className="max-w-4xl text-center">
               <p className="font-serif text-xl md:text-2xl text-card-text mb-4">
                 Welcome to
@@ -55,7 +47,7 @@ export default function About() {
           </section>
 
           {/* Section 2 - Our Story */}
-          <section className="flex-shrink-0 w-screen h-full snap-start flex items-center justify-center px-8 md:px-16">
+          <section className="w-full min-h-screen snap-start flex items-center justify-center px-8 md:px-16">
             <div className="max-w-5xl flex flex-col md:flex-row items-center gap-12">
               <div className="flex-1">
                 <h2 className="font-cursive text-4xl md:text-6xl text-card-text mb-6">
@@ -83,7 +75,7 @@ export default function About() {
           </section>
 
           {/* Section 3 - How It Works */}
-          <section className="flex-shrink-0 w-screen h-full snap-start flex items-center justify-center px-8 md:px-16">
+          <section className="w-full min-h-screen snap-start flex items-center justify-center px-8 md:px-16">
             <div className="max-w-5xl">
               <h2 className="font-cursive text-4xl md:text-6xl text-card-text mb-12 text-center">
                 How It Works
@@ -121,7 +113,7 @@ export default function About() {
           </section>
 
           {/* Section 4 - The Letter */}
-          <section className="flex-shrink-0 w-screen h-full snap-start flex items-center justify-center px-8 md:px-16">
+          <section className="w-full min-h-screen snap-start flex items-center justify-center px-8 md:px-16">
             <div className="max-w-5xl flex flex-col md:flex-row-reverse items-center gap-12">
               <div className="flex-1">
                 <h2 className="font-cursive text-4xl md:text-6xl text-card-text mb-6">
@@ -149,7 +141,7 @@ export default function About() {
           </section>
 
           {/* Section 5 - Order CTA */}
-          <section className="flex-shrink-0 w-screen h-full snap-start flex items-center justify-center px-8 md:px-16">
+          <section className="w-full min-h-screen snap-start flex items-center justify-center px-8 md:px-16">
             <div className="max-w-3xl text-center">
               <h2 className="font-cursive text-4xl md:text-6xl lg:text-7xl text-card-text mb-6">
                 Ready to Order?
