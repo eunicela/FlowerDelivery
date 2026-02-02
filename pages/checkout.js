@@ -4,7 +4,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Layout from '../components/Layout';
 import { useStore } from '../lib/store';
-import { getStripe } from '../lib/stripe';
 
 export default function Checkout() {
   const router = useRouter();
@@ -80,17 +79,10 @@ export default function Checkout() {
         throw new Error('Failed to create checkout session');
       }
 
-      const { sessionId } = await response.json();
+      const { url } = await response.json();
 
       // Redirect to Stripe Checkout
-      const stripe = await getStripe();
-      const { error: stripeError } = await stripe.redirectToCheckout({
-        sessionId,
-      });
-
-      if (stripeError) {
-        throw new Error(stripeError.message);
-      }
+      window.location.href = url;
     } catch (err) {
       console.error('Checkout error:', err);
       setError(err.message || 'Something went wrong. Please try again.');
