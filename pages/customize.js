@@ -43,15 +43,15 @@ export default function Customize() {
               )}
 
               {/* Add Letter Button with Price */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2">
                 <button
                   onClick={() => toggleCardIncluded(firstCard?.id)}
-                  className="btn-pill text-lg flex items-center gap-2"
+                  className="btn-pill text-sm flex items-center gap-1 px-3 py-1"
                 >
-                  <span className="text-xl">{isFirstCardLocked ? '+' : '-'}</span>
+                  <span className="text-base">{isFirstCardLocked ? '+' : '-'}</span>
                   {isFirstCardLocked ? 'add card' : 'remove card'}
                 </button>
-                <span className="font-cursive text-xl text-cream-white drop-shadow-lg font-bold">
+                <span className="font-cursive text-base text-cream-white drop-shadow-lg font-bold">
                   +$5
                 </span>
               </div>
@@ -84,7 +84,7 @@ export default function Customize() {
         {/* Checkout Button - Fixed bottom right, aligned with add card button */}
         <Link
           href="/checkout"
-          className="fixed bottom-20 right-8 btn-pill text-lg px-6 py-2 hover:scale-105 transform transition-all inline-block z-40"
+          className="fixed bottom-20 right-8 btn-pill text-sm px-4 py-1.5 hover:scale-105 transform transition-all inline-block z-40"
         >
           Checkout
         </Link>
@@ -126,24 +126,8 @@ export default function Customize() {
                 </li>
               </ul>
 
-              {/* Product Image */}
-              <div className="mt-4 rounded-lg overflow-hidden">
-                <Image
-                  src="/product-preview.png"
-                  alt="Valentine's bouquet with card"
-                  width={800}
-                  height={400}
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-
-              {/* Caption */}
-              <p className="font-serif text-xs text-gray-600 mt-3 text-center">
-                The bouquet is carefully boxed, and the stems are wrapped in moist cotton so the flowers stay fresh during shipping.
-              </p>
-
               {/* Bouquet Color Options */}
-              <div className="mt-5 grid grid-cols-3 gap-3">
+              <div className="mt-4 grid grid-cols-3 gap-3">
                 <div className="text-center">
                   <div className="rounded-lg overflow-hidden mb-1">
                     <Image
@@ -181,6 +165,22 @@ export default function Customize() {
                   <p className="font-serif text-xs text-gray-600">White</p>
                 </div>
               </div>
+
+              {/* Product Image */}
+              <div className="mt-4 rounded-lg overflow-hidden">
+                <Image
+                  src="/product-preview.png"
+                  alt="Valentine's bouquet with card"
+                  width={800}
+                  height={400}
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+
+              {/* Caption */}
+              <p className="font-serif text-xs text-gray-600 mt-3 text-center">
+                The bouquet is carefully boxed, and the stems are wrapped in moist cotton so the flowers stay fresh during shipping.
+              </p>
             </div>
           </div>
         )}

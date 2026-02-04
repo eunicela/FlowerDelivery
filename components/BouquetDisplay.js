@@ -21,8 +21,9 @@ export default function BouquetDisplay() {
         priority
       />
       {/* Price tag */}
-      <div className="absolute bottom-32 right-0 price-tag">
-        <span className="font-cursive text-3xl text-white drop-shadow-lg font-bold">$80</span>
+      <div className="absolute bottom-32 right-8 price-tag text-center">
+        <span className="font-cursive text-3xl text-white drop-shadow-lg font-bold">$95</span>
+        <p className="font-serif text-sm text-white drop-shadow-lg">(for 12 roses)</p>
       </div>
     </div>
   );

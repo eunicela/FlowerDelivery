@@ -1,5 +1,6 @@
 import { stripe } from '../../lib/stripe';
 import { createServerSupabaseClient } from '../../lib/supabase';
+import { sendOrderConfirmationEmail } from '../../lib/email';
 
 export const config = {
   api: {
@@ -39,16 +40,38 @@ export default async function handler(req, res) {
     case 'checkout.session.completed': {
       const session = event.data.object;
 
-      // Update order status to confirmed (preparing)
-      const { error } = await supabase
+      // Update order status to confirmed (preparing) and fetch order details
+      const { data: order, error } = await supabase
         .from('orders')
         .update({ status: 'preparing' })
-        .eq('stripe_session_id', session.id);
+        .eq('stripe_session_id', session.id)
+        .select()
+        .single();
 
       if (error) {
         console.error('Failed to update order status:', error);
-      } else {
-        console.log('Order confirmed:', session.metadata?.orderNumber);
+        // Return 500 so Stripe will retry the webhook
+        return res.status(500).json({ error: 'Database update failed' });
+      }
+
+      console.log('Order confirmed:', order.order_number);
+
+      // Send confirmation email
+      try {
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://piazzawholesale.com';
+        await sendOrderConfirmationEmail({
+          customerEmail: order.customer_email,
+          customerName: order.customer_name,
+          orderNumber: order.order_number,
+          flowerColor: order.flower_color,
+          deliveryDate: order.delivery_date,
+          deliveryAddress: order.delivery_address,
+          totalCents: order.total_cents,
+          confirmationUrl: `${baseUrl}/confirmation?session_id=${session.id}`,
+        });
+      } catch (emailError) {
+        console.error('Failed to send confirmation email:', emailError);
+        // Don't fail the webhook if email fails - order is already updated
       }
       break;
     }
@@ -65,7 +88,27 @@ export default async function handler(req, res) {
 
       if (error) {
         console.error('Failed to delete expired order:', error);
+        // Return 500 so Stripe will retry
+        return res.status(500).json({ error: 'Database delete failed' });
       }
+      break;
+    }
+
+    case 'checkout.session.async_payment_failed': {
+      const session = event.data.object;
+
+      // Mark order as failed
+      const { error } = await supabase
+        .from('orders')
+        .update({ status: 'payment_failed' })
+        .eq('stripe_session_id', session.id);
+
+      if (error) {
+        console.error('Failed to mark order as payment_failed:', error);
+        return res.status(500).json({ error: 'Database update failed' });
+      }
+
+      console.log('Payment failed for session:', session.id);
       break;
     }
 

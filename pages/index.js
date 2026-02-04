@@ -24,52 +24,37 @@ export default function Home() {
 
         {/* Navigation */}
         <nav className="absolute top-0 left-0 p-8 z-20">
-          <ul className="flex gap-8 font-serif text-lg text-card-text">
+          <ul className="flex gap-8 font-serif text-sm text-card-text">
             <li>
-              <Link href="/" className="hover:opacity-70 transition-opacity">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link href="/about" className="hover:opacity-70 transition-opacity">
+              <a href="https://sfflowermarket.org/vendor/piazza-wholesale-llc/" target="_blank" rel="noopener noreferrer" className="hover:opacity-70 transition-opacity">
                 About
-              </Link>
+              </a>
             </li>
           </ul>
         </nav>
 
         {/* Main Content */}
         <div className="min-h-screen flex relative z-10">
-          {/* Left Side - Text Content */}
-          <div className="flex-1 flex flex-col justify-center px-8 md:px-16 lg:px-20">
-            <div className="max-w-lg">
+          {/* Text Content */}
+          <div className="flex-1 flex flex-col justify-center items-center px-8 md:px-16 lg:px-20">
+            <div className="max-w-lg text-center">
               {/* Subtitle */}
-              <p className="font-serif text-xl md:text-2xl text-card-text mb-2">
+              <p className="font-serif text-sm text-card-text mb-2">
                 Piazza x EunifiedWorld
               </p>
 
               {/* Main Title */}
-              <h1 className="font-cursive text-6xl md:text-7xl lg:text-8xl text-card-text mb-8 leading-tight">
+              <h1 className="font-cursive text-[3.5rem] text-card-text mb-4 leading-tight">
                 Valentines Bouquet
               </h1>
 
               {/* Order Button */}
               <Link
                 href="/customize"
-                className="inline-block bg-deep-red text-white font-serif text-lg px-12 py-4 rounded-full hover:bg-red-800 transition-colors mb-6"
+                className="inline-block bg-red-700 text-white font-serif text-sm px-12 py-4 rounded-full hover:bg-red-900 transition-colors"
               >
                 Order now
               </Link>
-
-              {/* How it works link */}
-              <div>
-                <Link
-                  href="/customize"
-                  className="font-serif text-card-text underline hover:opacity-70 transition-opacity"
-                >
-                  How does this work?
-                </Link>
-              </div>
             </div>
           </div>
         </div>

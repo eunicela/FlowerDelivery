@@ -1,8 +1,14 @@
 import { createServerSupabaseClient } from '../../lib/supabase';
 
 export default async function handler(req, res) {
-  // Simple password protection
-  const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
+  // Simple password protection - require env var, no default
+  const adminPassword = process.env.ADMIN_PASSWORD;
+
+  if (!adminPassword) {
+    console.error('ADMIN_PASSWORD environment variable is not set');
+    return res.status(500).json({ error: 'Server configuration error' });
+  }
+
   const authHeader = req.headers.authorization;
 
   if (!authHeader || authHeader !== `Bearer ${adminPassword}`) {
