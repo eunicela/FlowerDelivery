@@ -158,7 +158,7 @@ export default function Checkout() {
               {/* Cards */}
               {includedCards.map((card, index) => (
                 <div key={card.id} className="flex items-center gap-3 py-3 border-b">
-                  <div className="w-14 h-11 bg-gray-100 rounded flex items-center justify-center">
+                  <div className="w-14 h-11 bg-gray-100 rounded flex items-center justify-center overflow-hidden">
                     {card.imageUrl ? (
                       <Image
                         src={card.imageUrl}
@@ -168,15 +168,12 @@ export default function Checkout() {
                         className="object-cover rounded"
                       />
                     ) : (
-                      <span className="font-serif text-xs text-gray-400">Card</span>
+                      <span className="font-serif text-xs text-gray-400">No photo</span>
                     )}
                   </div>
                   <div className="flex-1">
                     <p className="font-serif text-sm text-card-text">
-                      Letter Card {index + 1}
-                    </p>
-                    <p className="font-serif text-xs text-gray-500 truncate">
-                      To: {card.recipientName || 'Not specified'}
+                      Photo Card {index + 1}
                     </p>
                   </div>
                   <p className="font-serif text-sm text-card-text">$5.00</p>
@@ -238,9 +235,15 @@ export default function Checkout() {
                 />
                 <input
                   type="tel"
-                  placeholder="Phone"
+                  placeholder="Phone (e.g., 415-555-1234)"
                   value={customerInfo.phone}
-                  onChange={(e) => setCustomerInfo({ phone: e.target.value })}
+                  onChange={(e) => {
+                    // Allow only numbers, dashes, parentheses, spaces, and plus
+                    const cleaned = e.target.value.replace(/[^\d\s\-()+ ]/g, '');
+                    setCustomerInfo({ phone: cleaned });
+                  }}
+                  pattern="[\d\s\-()+ ]{10,}"
+                  title="Please enter a valid phone number (at least 10 digits)"
                   required
                   className="w-full p-2 border rounded-lg font-serif text-sm focus:border-deep-red outline-none"
                 />

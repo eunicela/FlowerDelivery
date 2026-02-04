@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import Image from 'next/image';
 
-const statusOptions = ['pending', 'ready', 'delivered'];
+const statusOptions = ['pending', 'preparing', 'ready', 'delivered'];
 
 export default function OrderTable({ orders, onStatusChange, sortOrder, onSortChange }) {
   const [expandedOrder, setExpandedOrder] = useState(null);
@@ -58,9 +58,8 @@ export default function OrderTable({ orders, onStatusChange, sortOrder, onSortCh
         </thead>
         <tbody>
           {orders.map((order) => (
-            <>
+            <Fragment key={order.id}>
               <tr
-                key={order.id}
                 onClick={() =>
                   setExpandedOrder(expandedOrder === order.id ? null : order.id)
                 }
@@ -123,41 +122,27 @@ export default function OrderTable({ orders, onStatusChange, sortOrder, onSortCh
                           className="bg-white p-4 rounded-lg shadow-sm"
                         >
                           <h5 className="font-serif text-lg mb-2">
-                            Card {index + 1}
+                            Photo Card {index + 1}
                           </h5>
-                          <div className="grid grid-cols-2 gap-4">
-                            <div>
-                              <p className="font-serif">
-                                <strong>To:</strong> {card.recipient_name}
-                              </p>
-                              <p className="font-serif">
-                                <strong>From:</strong> {card.sender_name}
-                              </p>
-                              <p className="font-serif mt-2">
-                                <strong>Message:</strong>
-                              </p>
-                              <p className="font-serif italic text-gray-600">
-                                {card.message}
-                              </p>
+                          {card.image_url ? (
+                            <div className="relative h-48 w-64">
+                              <Image
+                                src={card.image_url}
+                                alt="Card image"
+                                fill
+                                className="object-cover rounded"
+                              />
                             </div>
-                            {card.image_url && (
-                              <div className="relative h-32 w-48">
-                                <Image
-                                  src={card.image_url}
-                                  alt="Card image"
-                                  fill
-                                  className="object-cover rounded"
-                                />
-                              </div>
-                            )}
-                          </div>
+                          ) : (
+                            <p className="font-serif text-gray-500 italic">No photo uploaded</p>
+                          )}
                         </div>
                       ))}
                     </div>
                   </td>
                 </tr>
               )}
-            </>
+            </Fragment>
           ))}
         </tbody>
       </table>

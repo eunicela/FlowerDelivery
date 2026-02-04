@@ -23,8 +23,9 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Complete delivery address is required' });
     }
 
-    // Generate order number
-    const orderNumber = `VAL-2025-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
+    // Generate order number with current year
+    const currentYear = new Date().getFullYear();
+    const orderNumber = `VAL-${currentYear}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
 
     // Format delivery address (or null for pickup)
     const deliveryAddress = deliveryMethod === 'delivery'
@@ -71,7 +72,7 @@ export default async function handler(req, res) {
         .insert(cardsToInsert);
 
       if (cardsError) {
-        console.warn('Warning: Failed to save cards for order:', orderError);
+        console.warn('Warning: Failed to save cards for order:', cardsError);
       }
     }
 
@@ -96,8 +97,8 @@ export default async function handler(req, res) {
         price_data: {
           currency: 'usd',
           product_data: {
-            name: 'Personalized Letter Card',
-            description: `${cards.length} card(s) with your message`,
+            name: 'Photo Card',
+            description: `${cards.length} personalized photo card(s)`,
           },
           unit_amount: 500, // $5 per card
         },

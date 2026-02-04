@@ -16,7 +16,7 @@ export default async function handler(req, res) {
   try {
     const { data, error } = await supabase
       .from('orders')
-      .select('order_number, status, flower_color, delivery_date, total_cents, created_at')
+      .select('order_number, status, flower_color, delivery_date, delivery_method, total_cents, created_at')
       .eq('stripe_session_id', session_id)
       .single();
 

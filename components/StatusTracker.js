@@ -1,5 +1,6 @@
 const statuses = [
   { id: 'pending', label: 'Pending' },
+  { id: 'preparing', label: 'Preparing' },
   { id: 'ready', label: 'Ready' },
   { id: 'delivered', label: 'Delivered' },
 ];

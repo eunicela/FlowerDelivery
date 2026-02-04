@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Layout from '../components/Layout';
-import LetterCard from '../components/LetterCard';
 import ImageUpload from '../components/ImageUpload';
 import BouquetDisplay from '../components/BouquetDisplay';
 import ColorSelector from '../components/ColorSelector';
@@ -26,15 +25,8 @@ export default function Customize() {
             <div className="flex-1 flex flex-col items-center space-y-6">
               {/* Only show the first card for now */}
               {firstCard && (
-                <div className="space-y-4 w-full max-w-md">
-                  {/* Letter Card (Front) */}
-                  <LetterCard
-                    card={firstCard}
-                    showRemove={false}
-                    isLocked={isFirstCardLocked}
-                  />
-
-                  {/* Image Upload (Back) */}
+                <div className="w-full max-w-md">
+                  {/* Photo Card */}
                   <ImageUpload
                     cardId={firstCard.id}
                     isLocked={isFirstCardLocked}
@@ -42,14 +34,14 @@ export default function Customize() {
                 </div>
               )}
 
-              {/* Add Letter Button with Price */}
+              {/* Add Photo Card Button with Price */}
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => toggleCardIncluded(firstCard?.id)}
                   className="btn-pill text-sm flex items-center gap-1 px-3 py-1"
                 >
                   <span className="text-base">{isFirstCardLocked ? '+' : '-'}</span>
-                  {isFirstCardLocked ? 'add card' : 'remove card'}
+                  {isFirstCardLocked ? 'add photo card' : 'remove card'}
                 </button>
                 <span className="font-cursive text-base text-cream-white drop-shadow-lg font-bold">
                   +$5
@@ -113,10 +105,10 @@ export default function Customize() {
               </h3>
               <ul className="font-serif text-sm text-card-text space-y-2">
                 <li>
-                  <span className="text-deep-red">1.</span> Click &quot;add card&quot; to unlock the card
+                  <span className="text-deep-red">1.</span> Click &quot;add photo card&quot; to unlock the card
                 </li>
                 <li>
-                  <span className="text-deep-red">2.</span> Write your personalized letter and upload a photo
+                  <span className="text-deep-red">2.</span> Upload a photo for your personalized card
                 </li>
                 <li>
                   <span className="text-deep-red">3.</span> Choose your bouquet color
