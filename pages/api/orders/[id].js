@@ -1,4 +1,5 @@
 import { createServerSupabaseClient } from '../../../lib/supabase';
+import { sendStatusUpdateEmail } from '../../../lib/email';
 
 export default async function handler(req, res) {
   // Simple password protection - require env var, no default
@@ -34,6 +35,25 @@ export default async function handler(req, res) {
         .single();
 
       if (error) throw error;
+
+      // Send status update email for 'ready' and 'delivered' statuses
+      if (status === 'ready' || status === 'delivered') {
+        try {
+          await sendStatusUpdateEmail({
+            customerEmail: data.customer_email,
+            customerName: data.customer_name,
+            orderNumber: data.order_number,
+            flowerColor: data.flower_color,
+            deliveryMethod: data.delivery_method,
+            deliveryDate: data.delivery_date,
+            deliveryAddress: data.delivery_address,
+            status,
+          });
+        } catch (emailError) {
+          console.error('Failed to send status update email:', emailError);
+          // Don't fail the request if email fails
+        }
+      }
 
       res.status(200).json(data);
     } catch (error) {
