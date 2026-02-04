@@ -10,6 +10,7 @@ export default function Admin() {
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('all');
   const [sortOrder, setSortOrder] = useState('desc'); // 'asc' or 'desc'
+  const [testLoading, setTestLoading] = useState(false);
 
   const fetchOrders = useCallback(async () => {
     setLoading(true);
@@ -90,6 +91,36 @@ export default function Admin() {
     }
   }, [isAuthenticated, fetchOrders]);
 
+  const handleTestTransaction = async () => {
+    const email = prompt('Enter email address to receive test confirmation:');
+    if (!email) return;
+
+    setTestLoading(true);
+    setError('');
+
+    try {
+      const response = await fetch('/api/test-transaction', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${password}`,
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to create test transaction');
+      }
+
+      const { url } = await response.json();
+      window.location.href = url;
+    } catch (err) {
+      setError(err.message);
+      setTestLoading(false);
+    }
+  };
+
   // Login Screen
   if (!isAuthenticated) {
     return (
@@ -146,6 +177,13 @@ export default function Admin() {
               Florist Dashboard
             </h1>
             <div className="flex gap-4">
+              <button
+                onClick={handleTestTransaction}
+                disabled={testLoading}
+                className="btn-pill text-lg disabled:opacity-50 bg-amber-600 hover:bg-amber-700"
+              >
+                {testLoading ? 'Creating...' : 'Test Transaction'}
+              </button>
               <button
                 onClick={fetchOrders}
                 disabled={loading}
