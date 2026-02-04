@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const statusOptions = ['pending', 'ready', 'delivered'];
 
-export default function OrderTable({ orders, onStatusChange }) {
+export default function OrderTable({ orders, onStatusChange, sortOrder, onSortChange }) {
   const [expandedOrder, setExpandedOrder] = useState(null);
   const [updatingStatus, setUpdatingStatus] = useState(null);
 
@@ -41,7 +41,12 @@ export default function OrderTable({ orders, onStatusChange }) {
         <thead>
           <tr className="bg-gray-100">
             <th className="p-3 text-left font-serif text-lg">Order #</th>
-            <th className="p-3 text-left font-serif text-lg">Order Time</th>
+            <th
+              className="p-3 text-left font-serif text-lg cursor-pointer hover:bg-gray-200 select-none"
+              onClick={onSortChange}
+            >
+              Order Time {sortOrder === 'asc' ? '↑' : '↓'}
+            </th>
             <th className="p-3 text-left font-serif text-lg">Customer</th>
             <th className="p-3 text-left font-serif text-lg">Email</th>
             <th className="p-3 text-left font-serif text-lg">Phone</th>

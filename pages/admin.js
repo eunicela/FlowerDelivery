@@ -9,6 +9,7 @@ export default function Admin() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('all');
+  const [sortOrder, setSortOrder] = useState('desc'); // 'asc' or 'desc'
 
   const fetchOrders = useCallback(async () => {
     setLoading(true);
@@ -203,14 +204,22 @@ export default function Admin() {
               </div>
             ) : (
               <OrderTable
-                orders={orders.filter((order) => {
-                  if (activeTab === 'all') return true;
-                  if (activeTab === 'delivery') return order.delivery_method === 'delivery';
-                  if (activeTab === 'pending') return order.status === 'pending';
-                  if (activeTab === 'delivered') return order.status === 'delivered';
-                  return true;
-                })}
+                orders={orders
+                  .filter((order) => {
+                    if (activeTab === 'all') return true;
+                    if (activeTab === 'delivery') return order.delivery_method === 'delivery';
+                    if (activeTab === 'pending') return order.status === 'pending';
+                    if (activeTab === 'delivered') return order.status === 'delivered';
+                    return true;
+                  })
+                  .sort((a, b) => {
+                    const dateA = new Date(a.created_at);
+                    const dateB = new Date(b.created_at);
+                    return sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
+                  })}
                 onStatusChange={handleStatusChange}
+                sortOrder={sortOrder}
+                onSortChange={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
               />
             )}
           </div>
