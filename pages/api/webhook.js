@@ -64,6 +64,7 @@ export default async function handler(req, res) {
           customerName: order.customer_name,
           orderNumber: order.order_number,
           flowerColor: order.flower_color,
+          deliveryMethod: order.delivery_method,
           deliveryDate: order.delivery_date,
           deliveryAddress: order.delivery_address,
           totalCents: order.total_cents,
