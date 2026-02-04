@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -12,6 +12,8 @@ export default function Checkout() {
     cards,
     customerInfo,
     setCustomerInfo,
+    deliveryMethod,
+    setDeliveryMethod,
     deliveryInfo,
     setDeliveryInfo,
     getTotal,
@@ -20,6 +22,21 @@ export default function Checkout() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showPickupInfo, setShowPickupInfo] = useState(false);
+  const pickupInfoRef = useRef(null);
+
+  // Close popover when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (pickupInfoRef.current && !pickupInfoRef.current.contains(event.target)) {
+        setShowPickupInfo(false);
+      }
+    }
+    if (showPickupInfo) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [showPickupInfo]);
 
   // Only show cards that are included in the order
   const includedCards = cards.filter((card) => card.isIncluded);
@@ -73,6 +90,7 @@ export default function Checkout() {
           flowerColor,
           cards: uploadedCards,
           customerInfo,
+          deliveryMethod,
           deliveryInfo,
           totalCents: getTotal(),
         }),
@@ -94,10 +112,13 @@ export default function Checkout() {
     }
   };
 
-  // Calculate minimum delivery date (2 days from now)
+  // Minimum delivery date is tomorrow
   const minDate = new Date();
-  minDate.setDate(minDate.getDate() + 2);
+  minDate.setDate(minDate.getDate() + 1);
   const minDateStr = minDate.toISOString().split('T')[0];
+
+  // Maximum date is Valentine's Day (Feb 14, 2026)
+  const maxDateStr = '2026-02-14';
 
   return (
     <Layout title="Checkout - Valentine's Flower Delivery">
@@ -131,7 +152,7 @@ export default function Checkout() {
                     Bouquet
                   </p>
                 </div>
-                <p className="font-serif text-sm text-card-text">$80.00</p>
+                <p className="font-serif text-sm text-card-text">$95.00</p>
               </div>
 
               {/* Cards */}
@@ -161,6 +182,19 @@ export default function Checkout() {
                   <p className="font-serif text-sm text-card-text">$5.00</p>
                 </div>
               ))}
+
+              {/* Delivery Fee */}
+              {deliveryMethod === 'delivery' && (
+                <div className="flex items-center gap-3 py-3 border-b">
+                  <div className="w-14 h-11 bg-gray-100 rounded flex items-center justify-center">
+                    <span className="font-serif text-xs text-gray-400">Delivery</span>
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-serif text-sm text-card-text">Delivery Fee</p>
+                  </div>
+                  <p className="font-serif text-sm text-card-text">$30.00</p>
+                </div>
+              )}
 
               {/* Total */}
               <div className="pt-3">
@@ -212,16 +246,78 @@ export default function Checkout() {
                 />
               </div>
 
-              {/* Delivery Address */}
+              {/* Delivery Method */}
               <div className="space-y-2 mb-4">
+                <h3 className="font-serif font-medium text-sm text-card-text">Delivery Method</h3>
+                <div className="flex gap-3">
+                  <label className={`flex-1 p-3 border rounded-lg cursor-pointer transition-all ${deliveryMethod === 'delivery' ? 'border-deep-red bg-red-50' : 'border-gray-200 hover:border-gray-300'}`}>
+                    <input
+                      type="radio"
+                      name="deliveryMethod"
+                      value="delivery"
+                      checked={deliveryMethod === 'delivery'}
+                      onChange={(e) => setDeliveryMethod(e.target.value)}
+                      className="sr-only"
+                    />
+                    <div className="text-center">
+                      <p className="font-serif text-sm font-medium text-card-text">Delivery</p>
+                      <p className="font-serif text-xs text-gray-500">+$30.00</p>
+                    </div>
+                  </label>
+                  <div className="flex-1 relative" ref={pickupInfoRef}>
+                    <label className={`block p-3 border rounded-lg cursor-pointer transition-all ${deliveryMethod === 'pickup' ? 'border-deep-red bg-red-50' : 'border-gray-200 hover:border-gray-300'}`}>
+                      <input
+                        type="radio"
+                        name="deliveryMethod"
+                        value="pickup"
+                        checked={deliveryMethod === 'pickup'}
+                        onChange={(e) => setDeliveryMethod(e.target.value)}
+                        className="sr-only"
+                      />
+                      <div className="text-center">
+                        <p className="font-serif text-sm font-medium text-card-text inline-flex items-center gap-1">
+                          Pickup
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              setShowPickupInfo(!showPickupInfo);
+                            }}
+                            className="text-gray-400 hover:text-gray-600 text-xs"
+                            aria-label="Pickup location info"
+                          >
+                            ⓘ
+                          </button>
+                        </p>
+                        <p className="font-serif text-xs text-gray-500">Free</p>
+                      </div>
+                    </label>
+                    {showPickupInfo && (
+                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-80 bg-white shadow-lg rounded-lg p-3 z-10 text-left">
+                        <p className="font-serif text-xs text-card-text mb-2">
+                          Flower pickup is available at <strong>Piazza Wholesale LLC</strong>, located inside the San Francisco Flower Market on the 1st Floor – Market Hall (Stall 03), at 901 16th Street (parking entrance at 80 Mississippi St), San Francisco, CA 94107.
+                        </p>
+                        <p className="font-serif text-xs text-card-text">
+                          Pickup hours are between <strong>8:00am and 12:30pm</strong> on your selected pickup date.
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Delivery Address - greyed out for pickup */}
+              <div className={`space-y-2 mb-4 ${deliveryMethod === 'pickup' ? 'opacity-50' : ''}`}>
                 <h3 className="font-serif font-medium text-sm text-card-text">Delivery Address</h3>
                 <input
                   type="text"
                   placeholder="Street Address"
                   value={deliveryInfo.street}
                   onChange={(e) => setDeliveryInfo({ street: e.target.value })}
-                  required
-                  className="w-full p-2 border rounded-lg font-serif text-sm focus:border-deep-red outline-none"
+                  required={deliveryMethod === 'delivery'}
+                  disabled={deliveryMethod === 'pickup'}
+                  className="w-full p-2 border rounded-lg font-serif text-sm focus:border-deep-red outline-none disabled:bg-gray-100 disabled:cursor-not-allowed"
                 />
                 <div className="grid grid-cols-2 gap-2">
                   <input
@@ -229,16 +325,18 @@ export default function Checkout() {
                     placeholder="City"
                     value={deliveryInfo.city}
                     onChange={(e) => setDeliveryInfo({ city: e.target.value })}
-                    required
-                    className="p-2 border rounded-lg font-serif text-sm focus:border-deep-red outline-none"
+                    required={deliveryMethod === 'delivery'}
+                    disabled={deliveryMethod === 'pickup'}
+                    className="p-2 border rounded-lg font-serif text-sm focus:border-deep-red outline-none disabled:bg-gray-100 disabled:cursor-not-allowed"
                   />
                   <input
                     type="text"
                     placeholder="State"
                     value={deliveryInfo.state}
                     onChange={(e) => setDeliveryInfo({ state: e.target.value })}
-                    required
-                    className="p-2 border rounded-lg font-serif text-sm focus:border-deep-red outline-none"
+                    required={deliveryMethod === 'delivery'}
+                    disabled={deliveryMethod === 'pickup'}
+                    className="p-2 border rounded-lg font-serif text-sm focus:border-deep-red outline-none disabled:bg-gray-100 disabled:cursor-not-allowed"
                   />
                 </div>
                 <input
@@ -246,19 +344,23 @@ export default function Checkout() {
                   placeholder="ZIP Code"
                   value={deliveryInfo.zip}
                   onChange={(e) => setDeliveryInfo({ zip: e.target.value })}
-                  required
-                  className="w-full p-2 border rounded-lg font-serif text-sm focus:border-deep-red outline-none"
+                  required={deliveryMethod === 'delivery'}
+                  disabled={deliveryMethod === 'pickup'}
+                  className="w-full p-2 border rounded-lg font-serif text-sm focus:border-deep-red outline-none disabled:bg-gray-100 disabled:cursor-not-allowed"
                 />
               </div>
 
-              {/* Delivery Date */}
+              {/* Delivery/Pickup Date */}
               <div className="space-y-2 mb-4">
-                <h3 className="font-serif font-medium text-sm text-card-text">Delivery Date</h3>
+                <h3 className="font-serif font-medium text-sm text-card-text">
+                  {deliveryMethod === 'delivery' ? 'Delivery Date' : 'Pickup Date'}
+                </h3>
                 <input
                   type="date"
                   value={deliveryInfo.date}
                   onChange={(e) => setDeliveryInfo({ date: e.target.value })}
                   min={minDateStr}
+                  max={maxDateStr}
                   required
                   className="w-full p-2 border rounded-lg font-serif text-sm focus:border-deep-red outline-none"
                 />
