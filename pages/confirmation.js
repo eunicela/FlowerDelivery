@@ -210,10 +210,10 @@ export default function Confirmation() {
             <p className="text-sm">
               Contact us at{' '}
               <a
-                href="mailto:piazzawholesale@gmail.com"
+                href="mailto:Eflowerwholesale@gmail.com"
                 className="text-deep-red underline"
               >
-                piazzawholesale@gmail.com
+                Eflowerwholesale@gmail.com
               </a>
             </p>
           </div>
