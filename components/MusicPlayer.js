@@ -30,7 +30,7 @@ export default function MusicPlayer() {
   };
 
   return (
-    <div className="fixed top-4 left-4 z-50 flex flex-col items-center">
+    <div className="fixed top-4 left-4 z-50 flex items-center gap-3">
       {/* Spinning CD */}
       <button
         onClick={togglePlay}
@@ -78,11 +78,11 @@ export default function MusicPlayer() {
       </button>
 
       {/* Song info */}
-      <div className="mt-2 text-center">
-        <p className="font-cursive text-xs text-cream-white drop-shadow-md leading-tight">
+      <div className="text-left">
+        <p className="font-cursive text-sm text-cream-white drop-shadow-md leading-tight">
           From the Start
         </p>
-        <p className="font-serif text-[10px] text-cream-white/70 drop-shadow-md">
+        <p className="font-serif text-xs text-cream-white/70 drop-shadow-md">
           Laufey
         </p>
       </div>
