@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import MusicPlayer from './MusicPlayer';
 
 export default function Layout({ children, title = 'Valentine\'s Flower Delivery' }) {
   const handleSecretClick = async () => {
@@ -48,6 +49,7 @@ export default function Layout({ children, title = 'Valentine\'s Flower Delivery
           backgroundPosition: 'center',
         }}
       >
+        <MusicPlayer />
         {children}
         {/* Secret test transaction button */}
         <button

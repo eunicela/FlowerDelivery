@@ -47,6 +47,9 @@ export default function Customize() {
                   +$5
                 </span>
               </div>
+              <p className="font-serif text-xs text-cream-white/80 mt-1">
+                (Printed on matte cardstock.)
+              </p>
             </div>
 
             {/* RIGHT SIDE - Bouquet display */}
