@@ -66,10 +66,11 @@ export default function Checkout() {
               body: formData,
             });
 
-            if (uploadRes.ok) {
-              const data = await uploadRes.json();
-              imageUrl = data.url;
+            const data = await uploadRes.json();
+            if (!uploadRes.ok) {
+              throw new Error(data.error || 'Failed to upload photo');
             }
+            imageUrl = data.url;
           }
           return {
             recipientName: card.recipientName,

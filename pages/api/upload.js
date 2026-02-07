@@ -37,6 +37,12 @@ export default async function handler(req, res) {
 
     const supabase = createServerSupabaseClient();
 
+    // Check if Supabase is configured
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      console.error('Supabase environment variables not configured');
+      return res.status(500).json({ error: 'Storage not configured. Check NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY environment variables.' });
+    }
+
     // Upload to Supabase Storage
     const { data, error } = await supabase.storage
       .from('card-images')
@@ -47,10 +53,7 @@ export default async function handler(req, res) {
 
     if (error) {
       console.error('Supabase upload error:', error);
-      // If Supabase is not configured, return a placeholder URL
-      return res.status(200).json({
-        url: `/api/placeholder-image?name=${encodeURIComponent(file.originalFilename || 'image')}`,
-      });
+      return res.status(500).json({ error: `Failed to upload image: ${error.message}` });
     }
 
     // Get public URL
