@@ -63,7 +63,7 @@ export default function OrderTable({ orders, onStatusChange, sortOrder, onSortCh
                 onClick={() =>
                   setExpandedOrder(expandedOrder === order.id ? null : order.id)
                 }
-                className="border-b hover:bg-gray-50 cursor-pointer"
+                className={`border-b hover:bg-gray-50 cursor-pointer ${order.status === 'pending' ? 'opacity-50' : ''}`}
               >
                 <td className="p-3 font-serif">{order.order_number}</td>
                 <td className="p-3 font-serif text-sm">{formatDateTime(order.created_at)}</td>
@@ -96,19 +96,24 @@ export default function OrderTable({ orders, onStatusChange, sortOrder, onSortCh
                 </td>
                 <td className="p-3 font-serif">{formatCurrency(order.total_cents)}</td>
                 <td className="p-3">
-                  <select
-                    value={order.status}
-                    onChange={(e) => handleStatusChange(order.id, e.target.value)}
-                    onClick={(e) => e.stopPropagation()}
-                    disabled={updatingStatus === order.id}
-                    className="font-serif p-1 border rounded bg-white disabled:opacity-50"
-                  >
-                    {statusOptions.map((status) => (
-                      <option key={status} value={status}>
-                        {status.charAt(0).toUpperCase() + status.slice(1)}
-                      </option>
-                    ))}
-                  </select>
+                  <div className="flex items-center gap-2">
+                    {order.status === 'pending' && (
+                      <span className="text-xs bg-red-100 text-red-700 px-1.5 py-0.5 rounded font-medium">UNPAID</span>
+                    )}
+                    <select
+                      value={order.status}
+                      onChange={(e) => handleStatusChange(order.id, e.target.value)}
+                      onClick={(e) => e.stopPropagation()}
+                      disabled={updatingStatus === order.id}
+                      className="font-serif p-1 border rounded bg-white disabled:opacity-50"
+                    >
+                      {statusOptions.map((status) => (
+                        <option key={status} value={status}>
+                          {status.charAt(0).toUpperCase() + status.slice(1)}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </td>
               </tr>
               {expandedOrder === order.id && order.cards && (
@@ -116,6 +121,10 @@ export default function OrderTable({ orders, onStatusChange, sortOrder, onSortCh
                   <td colSpan={9} className="bg-gray-50 p-4">
                     <div className="space-y-4">
                       <h4 className="font-serif text-xl font-bold">Order Details</h4>
+                      <div className="font-serif text-sm text-gray-600 space-y-1">
+                        <p><span className="font-medium">Order #:</span> {order.order_number}</p>
+                        <p><span className="font-medium">Customer:</span> {order.customer_name}</p>
+                      </div>
                       {order.cards.map((card, index) => (
                         <div
                           key={card.id}
@@ -124,6 +133,17 @@ export default function OrderTable({ orders, onStatusChange, sortOrder, onSortCh
                           <h5 className="font-serif text-lg mb-2">
                             Photo Card {index + 1}
                           </h5>
+                          <div className="font-serif text-sm space-y-1 mb-3">
+                            {card.recipient_name && (
+                              <p><span className="font-medium">To:</span> {card.recipient_name}</p>
+                            )}
+                            {card.sender_name && (
+                              <p><span className="font-medium">From:</span> {card.sender_name}</p>
+                            )}
+                            {card.message && (
+                              <p><span className="font-medium">Message:</span> {card.message}</p>
+                            )}
+                          </div>
                           {card.image_url ? (
                             <div className="relative h-48 w-64">
                               <Image
